@@ -1,4 +1,7 @@
-#include "dependencias/CWebStudio.h"
+#include "dependecies.h"
+#include "declaration.h"
+#include "definition.h"
+
 #define DEBUG
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
