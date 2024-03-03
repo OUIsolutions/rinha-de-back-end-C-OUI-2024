@@ -2,11 +2,10 @@
 #include "declaration.h"
 #include "definition.h"
 
-#define DEBUG
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
-    return cweb_send_text("Hello World", 200);
+    return cweb.response.send_text("Hello World", 200);
 
 }
 
@@ -15,10 +14,13 @@ int main(int argc, char *argv[]){
         for(int i = 3000;i < 4000; i++){
             CwebServer server = newCwebSever(i, main_sever);
             server.single_process = true;
-            if(CwebServer_start(&server)){
+            if(cweb.server.start(&server)){
                 break;
             }
         }
+    #else
+            CwebServer server = newCwebSever(PORTA_PADRAO, main_sever);
+            cweb.server.start(&server)
     #endif
 
     return 0;
