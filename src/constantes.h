@@ -2,3 +2,5 @@
 #define PORTA_PADRAO 9999
 
 
+#define ROTA_EXTRATO  1 
+#define ROTA_TRANSACAO 2 
