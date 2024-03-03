@@ -7,3 +7,4 @@ typedef struct {
 } RotaParser;
 
 RotaParser  parsear_rota(const char *rota);
+
