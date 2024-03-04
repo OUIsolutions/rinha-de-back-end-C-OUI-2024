@@ -22,7 +22,7 @@ CwebHttpResponse * envia_erro_de_validacao_da_chash(CHash *elemento){
             message
             );
     char *menssagem_str = CTextStack_self_transform_in_string_and_self_clear(messagem_formatada);
-    return cweb_send_text_cleaning_memory(menssagem_str,MAL_FORMATADO);
+    return cweb_send_text_cleaning_memory(menssagem_str, INCONSISTENCIA);
 #else
     return cweb_send_text("",MAL_FORMATADO);
 #endif

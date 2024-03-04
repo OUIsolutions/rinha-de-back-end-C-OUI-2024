@@ -8,7 +8,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
     RotaParser rota_obj = parsear_rota(request->route);
     if(rota_obj.invalida){
-        return cweb_send_text(ROTA_INVALIDA,MAL_FORMATADO);
+        return cweb_send_text(ROTA_INVALIDA, INCONSISTENCIA);
     }
     UniversalGarbage  *garbage = newUniversalGarbage();
     DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
@@ -22,10 +22,9 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     CwebHttpResponse *resposta  = NULL;
 
     if(rota_obj.acao == ACAO_TRANSACAO){
-        resposta = gera_transacao(request,cliente);
+        resposta = gera_transacao(request,banco,cliente);
     }
-
-
+    UniversalGarbage_free(garbage);
     return resposta;
 
 }

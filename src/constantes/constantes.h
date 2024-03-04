@@ -4,3 +4,4 @@
 #include "erros.h"
 #include "caminhos.h"
 #include "posicoes_de_array.h"
+#include "respostas.h"

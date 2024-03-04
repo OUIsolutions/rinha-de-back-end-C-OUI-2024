@@ -9,5 +9,5 @@
 #define TIPO "tipo"
 #define DESCRICAO "descricao"
 
-#define CODIGO_DEBITO_STR "c"
-#define CODIGO_CREDITO_STR "d"
+#define CODIGO_DEBITO_STR "d"
+#define CODIGO_CREDITO_STR "c"
