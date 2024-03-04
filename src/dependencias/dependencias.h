@@ -1,4 +1,4 @@
-#include "CWebStudio.h"
-#include "UniversalGarbage.h"
-#include "doTheWorld.h"
-#include "CHashManipulator.h"
+#include "CWebStudio/one.c"
+#include "UniversalGarbageColector/one.h"
+#include "doTheWorld/one.c"
+#include "CHashManipulator/one.c"

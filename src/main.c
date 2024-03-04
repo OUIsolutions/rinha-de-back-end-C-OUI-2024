@@ -58,6 +58,10 @@ int main(int argc, char *argv[]){
         }
     #else
             CwebServer server = newCwebSever(PORTA_PADRAO, main_sever);
+            server.max_queue = MAXIMO_ESPERA;
+            server.max_requests =  MAXIMO_REQUEST;
+            server.function_timeout = TIMEOUT_FUNCAO;
+            server.client_timeout = TIMEOUT_CLIENTE;
              CwebServer_start(&server);
     #endif
 

@@ -1,0 +1,7 @@
+#include "dependencies/definition.h"
+#include "io/io.c"
+#include "hash/definition.h"
+#include "types/types.c"
+#include "parsers/definition.h"
+#include "error/definition.h"
+#include "namespace/definition.h"

@@ -1,0 +1,7 @@
+#include "hash/hash.c"
+#include "number/number.c"
+#include "bool/bool.c"
+#include "string/string.c"
+#include "array/array.c"
+#include "array/arrows.c"
+#include "object/object.c"
