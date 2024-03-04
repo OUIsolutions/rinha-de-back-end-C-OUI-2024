@@ -5,32 +5,37 @@ CHashArray  * obter_clientes_default(){
             newCHashArray(
                     newCHashNumber(0), //saldo
                     newCHashNumber(100000), //limite
-                    newCHashArrayEmpty() //transacoes
+                    newCHashNumber(0), //total transacoes
+                    newCHashNumber(0)//ultima transacao
             ),
 
             newCHashArray(
                     newCHashNumber(0), //saldo
                     newCHashNumber(80000), //limite
-                    newCHashArrayEmpty() //transacoes
-
+                    newCHashNumber(0), //total transacoes
+                    newCHashNumber(0) //ultima transacao
             ),
 
             newCHashArray(
                     newCHashNumber(0), //saldo
                     newCHashNumber(1000000), //limite
-                    newCHashArrayEmpty() //transacoes
+                    newCHashNumber(0), //total transacoes
+                    newCHashNumber(0) //ultima transacao
+
             ),
 
             newCHashArray(
                     newCHashNumber(0), //saldo
                     newCHashNumber(10000000), //limtie
-                    newCHashArrayEmpty() //transacoes
+                    newCHashNumber(0), //total transacoes
+                    newCHashNumber(0) //ultima transacao
 
             ),
             newCHashArray(
                     newCHashNumber(0), //saldo
                     newCHashNumber(500000), //limite
-                    newCHashArrayEmpty() //transacoes
+                    newCHashNumber(0), //total transacoes
+                    newCHashNumber(0)//ultima transacao
             )
     );
 }

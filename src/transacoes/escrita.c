@@ -23,26 +23,20 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
 
 
     int id_transacao = 0;
-    cJSON *lista_transacoes = cJSON_GetArrayItem(dados,TRANSACOES_INDEX);
 
-    int total_transacoes  = cJSON_GetArraySize(lista_transacoes);
+    int total_transacoes  = cJSON_GetArrayItem(dados,TOTAL_TRANSACOES_INDEX)->valueint;
+    int ultima_transacao = cJSON_GetArrayItem(dados,ULTIMA_TRANSACAO_INDEX)->valueint;
+
     if(total_transacoes > 0){
-        cJSON *ultima = cJSON_GetArrayItem(lista_transacoes,total_transacoes -1);
-        id_transacao = ultima->valueint+1;
+        id_transacao = ultima_transacao+1;
     }
-
     DtwResource *resource_transacaos = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
-
-
-    cJSON_AddItemToArray(lista_transacoes, cJSON_CreateNumber(id_transacao));
-    total_transacoes+=1;
-    if(total_transacoes >MAXIMO_TRANSACOES){
-        int primeiro = cJSON_GetArrayItem(lista_transacoes,0)->valueint;
+    if(total_transacoes  >= MAXIMO_TRANSACOES){
+        int primeiro = ultima_transacao - total_transacoes;
         DtwResource *transacao_mais_antiga = DtwResource_sub_resource(resource_transacaos,"%d",primeiro);
         DtwResource_destroy(transacao_mais_antiga);
-
-        cJSON_DeleteItemFromArray(lista_transacoes,0);
     }
+
 
     //definindo as resources
     char *json_transacao_str = cJSON_PrintUnformatted(json_transacao);
