@@ -23,7 +23,7 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
 
     char *data_do_extrato = convert_inteiro_para_data_em_str(time(NULL));
     UniversalGarbage_add_simple(garbage,data_do_extrato);
-    cJSON_AddStringToObject(responsta_saldo,REALIZADA_EM,data_do_extrato);
+    cJSON_AddStringToObject(responsta_saldo,DATA_EXTRATO,data_do_extrato);
 
 
     int total_transacoes  = cJSON_GetArrayItem(dados,TOTAL_TRANSACOES_INDEX)->valueint;
