@@ -29,12 +29,12 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         UniversalGarbage_free(garbage);
         return cweb_send_text(CLIENTE_NAO_EXIST,NAO_ENCONTRADO);
     }
-    CwebHttpResponse *resposta  = cweb_send_text("aaaa",200);
-    /*
+    CwebHttpResponse *resposta  = NULL;
+
     if(rota_obj.acao == ACAO_TRANSACAO){
         resposta = gera_transacao(request,banco,cliente);
     }
-     */
+
     UniversalGarbage_free(garbage);
     return resposta;
 

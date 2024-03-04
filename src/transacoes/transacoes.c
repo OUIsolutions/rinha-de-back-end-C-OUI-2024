@@ -10,9 +10,11 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     DtwResource_lock(id_cliente);
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
+
     UniversalGarbage *garbage = newUniversalGarbage();
     cJSON *dados = cJSON_Parse(dados_str);
     UniversalGarbage_add(garbage, cJSON_Delete,dados);
+
     int saldo = cJSON_GetArrayItem(dados,SALDO_INDEX)->valueint;
     int limite = cJSON_GetArrayItem(dados,LIMITE_INDEX)->valueint;
     int saldo_full = saldo+limite;
@@ -35,7 +37,7 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     cJSON *resposta =cJSON_CreateObject();
     cJSON_AddNumberToObject(resposta,SALDO,saldo);
     cJSON_AddNumberToObject(resposta,LIMITE,limite);
-
+    UniversalGarbage_free(garbage);
     return cweb_send_cJSON_cleaning_memory(resposta,RETORNO_OK);
 
 
