@@ -21,7 +21,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
     CwebHttpResponse *resposta  = NULL;
 
-    if(rota_obj.acao == ACAO_EXTRATO){
+    if(rota_obj.acao == ACAO_TRANSACAO){
         resposta = gera_transacao(request,cliente);
     }
 
