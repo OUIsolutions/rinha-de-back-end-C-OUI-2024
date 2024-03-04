@@ -30,13 +30,19 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     if(total_transacoes > 0){
         id_transacao = ultima_transacao+1;
     }
+    ultima_transacao  = id_transacao;
+    total_transacoes+=1;
+
     DtwResource *resource_transacaos = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
     if(total_transacoes  >= MAXIMO_TRANSACOES){
         int primeiro = ultima_transacao - total_transacoes;
         DtwResource *transacao_mais_antiga = DtwResource_sub_resource(resource_transacaos,"%d",primeiro);
         DtwResource_destroy(transacao_mais_antiga);
+        total_transacoes-=1;
     }
 
+    cJSON_ReplaceItemInArray(dados,TOTAL_TRANSACOES_INDEX, cJSON_CreateNumber(total_transacoes));
+    cJSON_ReplaceItemInArray(dados,ULTIMA_TRANSACAO_INDEX, cJSON_CreateNumber(ultima_transacao));
 
     //definindo as resources
     char *json_transacao_str = cJSON_PrintUnformatted(json_transacao);
