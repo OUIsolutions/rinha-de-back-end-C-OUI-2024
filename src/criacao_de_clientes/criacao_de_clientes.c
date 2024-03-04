@@ -43,10 +43,13 @@ void cria_clientes_inicias(){
     CHashArray  *clientes =obter_clientes_default();
     UniversalGarbage_add(garbage, CHash_free,clientes);
 
+
     int total = CHash_get_size(clientes);
     for(int i = 0; i < total; i++){
-        CHashObject *cliete_atual = CHashArray_getArray(clientes, i);
+        CHashArray *cliente_atual = CHashArray_getArray(clientes, i);
         DtwResource * resource_cliente = DtwResource_sub_resource(banco,"%d",i+1);
+        DtwResource * dados = DtwResource_sub_resource(resource_cliente,CAMINHO_DADOS);
+        escreve_chash_em_sub_resource(dados,cliente_atual);
 
     }
     DtwResource_commit(banco);

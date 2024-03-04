@@ -3,12 +3,8 @@
 #ifdef DEBUG
 
     #define CAMINHO_BANCO "banco"
-    #define CAMINHO_SALDO "saldo"
-    #define  CAMINHO_LIMITE "limite"
+#define  CAMINHO_DADOS "dados"
 #else
-
     #define CAMINHO_BANCO "b"
-    #define CAMINHO_SALDO "s"
-    #define  CAMINHO_LIMITE "l"
-
+    #define  CAMINHO_DADOS "d"
 #endif
