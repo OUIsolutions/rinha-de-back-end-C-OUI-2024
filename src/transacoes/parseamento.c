@@ -2,7 +2,7 @@
 Transacao  parseia_transacao(CwebHttpRequest *request){
 
     Transacao criada = {0};
-    cJSON *body = CWebHttpRequest_read_cJSON(request);
+    cJSON *body = CWebHttpRequest_read_cJSON(request,MAXIMO_BODY);
     if(!body){
         criada.resposta_de_erro =  cweb_send_text(BODY_NAO_INFORMADO,MAL_FORMATADO);
         return criada;
@@ -49,33 +49,25 @@ Transacao  parseia_transacao(CwebHttpRequest *request){
         return criada;
     }
     criada.valor = json_valor->valueint;
-
-    //parseando tipo
-    
-    char *tipo = CHashObject_getString(body,TIPO);
-
-    CHash_catch(body){
-        criada.resposta_de_erro = envia_erro_de_validacao_da_chash(body);
-        UniversalGarbage_free(garbage);
+    cJSON *json_tipo = cJSON_GetObjectItem(body,TIPO);
+    if(!json_tipo){
+        criada.resposta_de_erro =  cweb_send_text(TIPO_NAO_INFORMADO,MAL_FORMATADO);
+        return criada;
+    }
+    if(!cJSON_IsString(json_tipo)){
+        criada.resposta_de_erro =  cweb_send_text(TIPO_INVALIDO,MAL_FORMATADO);
         return criada;
     }
 
-
-
-
-
-    if(strcmp(tipo,CODIGO_DEBITO_STR) == 0){
+    if(strcmp(json_tipo->valuestring,CODIGO_DEBITO_STR) == 0){
         criada.tipo = CODIGO_DEBITO;
     }
-    if(strcmp(tipo,CODIGO_CREDITO_STR) == 0){
+    if(strcmp(json_tipo->valuestring,CODIGO_CREDITO_STR) == 0){
         criada.tipo = CODIGO_CREDITO;
     }
-
     if(!criada.tipo){
         criada.resposta_de_erro= cweb_send_text(TIPO_INVALIDO,MAL_FORMATADO);
-        UniversalGarbage_free(garbage);
         return criada;
     }
-    UniversalGarbage_free(garbage);
     return criada;
 }
