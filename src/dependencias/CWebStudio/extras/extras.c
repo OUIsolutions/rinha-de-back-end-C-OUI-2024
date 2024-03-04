@@ -29,26 +29,6 @@ unsigned char *cweb_load_any_content(const char * path,int *size,bool *is_binary
     return content;
 }
 
-void private_cweb_sleep_milliseconds(long  msec){
-
-
-    struct timespec ts;
-    int res;
-
-    if (msec < 0)
-    {
-        errno = EINVAL;
-        return;
-    }
-
-    ts.tv_sec = msec / 1000;
-    ts.tv_nsec = (msec % 1000) * 1000000;
-
-    do {
-        res = nanosleep(&ts, &ts);
-    } while (res && errno == EINTR);
-
-}
 char *cweb_load_string_file_content(const char * path){
     FILE *file = fopen(path,"r");
     if(file == NULL){
