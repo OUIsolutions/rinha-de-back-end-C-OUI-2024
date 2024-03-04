@@ -6,6 +6,8 @@
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
 
+    RotaParser rota = parsear_rota(request->route);
+
     
     return cweb.response.send_text("Hello World", 200);
 
