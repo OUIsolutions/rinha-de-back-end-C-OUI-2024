@@ -16,7 +16,7 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
     cJSON *ultimas_transacoes = cJSON_CreateArray();
 
     cJSON_AddItemToObject(resposta,SALDO,responsta_saldo);
-    cJSON_AddItemToObject(responsta_saldo,ULTIMAS_TRANSACOES,ultimas_transacoes);
+    cJSON_AddItemToObject(resposta,ULTIMAS_TRANSACOES,ultimas_transacoes);
 
     cJSON_AddNumberToObject(responsta_saldo,TOTAL,saldo);
     cJSON_AddNumberToObject(responsta_saldo,LIMITE,limite);
@@ -34,7 +34,7 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
 
     cJSON *array_transacao = NULL;
     UniversalGarbage_add(garbage, cJSON_Delete,array_transacao);
-    for(int i =0; i < total_transacoes; i++){
+    for(int i =total_transacoes-1; i >=0; i--){
         cJSON *id_transacao_corrente = cJSON_GetArrayItem(transacoes,i);
         char * texto_transacao = DtwResource_get_string_from_sub_resource(
                 pasta_transacoes,
@@ -54,13 +54,15 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
         cJSON  *objeto_transcao = cJSON_CreateObject();
         cJSON_AddItemToArray(ultimas_transacoes,objeto_transcao);
 
-        cJSON_AddNumberToObject(objeto_transcao,VALOR,valor);
 
         if(valor < 0){
+            cJSON_AddNumberToObject(objeto_transcao,VALOR,valor *-1);
+
             cJSON_AddStringToObject(objeto_transcao,TIPO, CODIGO_DEBITO_STR);
         }
 
         if(valor >=0){
+            cJSON_AddNumberToObject(objeto_transcao,VALOR,valor );
             cJSON_AddStringToObject(objeto_transcao,TIPO, CODIGO_CREDITO_STR);
         }
 

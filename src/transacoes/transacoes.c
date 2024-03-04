@@ -32,7 +32,7 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
         UniversalGarbage_free(garbage);
         return cweb_send_text(LIMITE_INDISPONIVEL,INCONSISTENCIA);
     }
-    escreve_transacao_no_disco(banco, id_cliente, dados, saldo, transacao.valor,transacao.descricao);
+    escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao);
 
     cJSON *resposta =cJSON_CreateObject();
     cJSON_AddNumberToObject(resposta,SALDO,saldo);

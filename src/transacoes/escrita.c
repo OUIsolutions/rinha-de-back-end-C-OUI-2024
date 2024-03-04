@@ -1,6 +1,6 @@
 
 
-void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJSON *dados, int saldo, int valor,const char *descricao){
+void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJSON *dados, int saldo,Transacao *transacao){
 
     UniversalGarbage  *garbage = newUniversalGarbage();
 
@@ -11,9 +11,15 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     //criando a transacao
     cJSON *json_transacao = cJSON_CreateArray();
     UniversalGarbage_add(garbage, cJSON_Delete,json_transacao);
-    cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(valor));
+    if(transacao->tipo == CODIGO_CREDITO){
+        cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(transacao->valor));
+    }
+    if(transacao->tipo== CODIGO_DEBITO){
+        cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(transacao->valor * -1));
+
+    }
     cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(time(NULL)));
-    cJSON_AddItemToArray(json_transacao, cJSON_CreateString(descricao));
+    cJSON_AddItemToArray(json_transacao, cJSON_CreateString(transacao->descricao));
 
 
     int id_transacao = 0;
@@ -30,7 +36,7 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
 
     cJSON_AddItemToArray(lista_transacoes, cJSON_CreateNumber(id_transacao));
     total_transacoes+=1;
-    if(total_transacoes >10){
+    if(total_transacoes >MAXIMO_TRANSACOES){
         int primeiro = cJSON_GetArrayItem(lista_transacoes,0)->valueint;
         DtwResource *transacao_mais_antiga = DtwResource_sub_resource(resource_transacaos,"%d",primeiro);
         DtwResource_destroy(transacao_mais_antiga);
