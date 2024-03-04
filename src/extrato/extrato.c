@@ -25,8 +25,10 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
     UniversalGarbage_add_simple(garbage,data_do_extrato);
     cJSON_AddStringToObject(responsta_saldo,REALIZADA_EM,data_do_extrato);
 
-    cJSON * transacoes = cJSON_GetArrayItem(dados,TRANSACOES_INDEX);
-    int total_transacoes = cJSON_GetArraySize(transacoes);
+
+    int total_transacoes  = cJSON_GetArrayItem(dados,TOTAL_TRANSACOES_INDEX)->valueint;
+    int ultima_transacao = cJSON_GetArrayItem(dados,ULTIMA_TRANSACAO_INDEX)->valueint;
+
     DtwResource  *pasta_transacoes = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
 
     char *realizada_em = NULL;
@@ -34,13 +36,10 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
 
     cJSON *array_transacao = NULL;
     UniversalGarbage_add(garbage, cJSON_Delete,array_transacao);
-    for(int i =total_transacoes-1; i >=0; i--){
-        cJSON *id_transacao_corrente = cJSON_GetArrayItem(transacoes,i);
-        char * texto_transacao = DtwResource_get_string_from_sub_resource(
-                pasta_transacoes,
-                "%d",
-                id_transacao_corrente->valueint
-                );
+    for(int i =ultima_transacao; i >= ultima_transacao - total_transacoes; i--){
+
+        char * texto_transacao = DtwResource_get_string_from_sub_resource(pasta_transacoes,"%d",i);
+
         array_transacao = cJSON_Parse(texto_transacao);
         UniversalGarbage_resset(garbage,array_transacao);
 
