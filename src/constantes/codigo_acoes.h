@@ -1,0 +1,4 @@
+
+#define ACAO_EXTRATO  1
+#define ACAO_TRANSACAO 2
+

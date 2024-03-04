@@ -1,4 +1,4 @@
-#include "dependecies.h"
+#include "dependencias/dependencias.h"
 #include "declaration.h"
 #include "definition.h"
 
@@ -7,8 +7,11 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
 
     RotaParser rota = parsear_rota(request->route);
+    if(rota.invalida){
+        return cweb.response.send_text(ROTA_INVALIDA,MAL_FORMATADO);
+    }
 
-    
+
     return cweb.response.send_text("Hello World", 200);
 
 }
