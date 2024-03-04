@@ -22,6 +22,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_text(ROTA_INVALIDA, INCONSISTENCIA);
     }
     DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
+    banco->root_props->locker->total_checks = TOTAL_LOCK_CHECKS;
     UniversalGarbage_add(garbage, DtwResource_free,banco);
 
     DtwResource *cliente = DtwResource_sub_resource(banco,rota_obj.id_cliente);
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]){
         }
     #else
             CwebServer server = newCwebSever(PORTA_PADRAO, main_sever);
-            cweb.server.start(&server);
+             CwebServer_start(&server);
     #endif
 
     return 0;

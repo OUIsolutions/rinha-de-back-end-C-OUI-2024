@@ -2,6 +2,7 @@
 *.d
 database
 # Object files
+b
 *.o
 *.ko
 *.obj
