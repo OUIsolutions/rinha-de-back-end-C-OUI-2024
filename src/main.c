@@ -19,12 +19,14 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         UniversalGarbage_free(garbage);
         return cweb_send_text(CLIENTE_NAO_EXIST,NAO_ENCONTRADO);
     }
+    CwebHttpResponse *resposta  = NULL;
+
+    if(rota_obj.acao == ACAO_EXTRATO){
+        resposta = gera_transacao(request,cliente);
+    }
 
 
-
-
-
-    return cweb_send_text("Hello World", 200);
+    return resposta;
 
 }
 

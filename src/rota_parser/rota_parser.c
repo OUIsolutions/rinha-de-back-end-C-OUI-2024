@@ -6,7 +6,7 @@ RotaParser  parsear_rota(const char *rota){
     UniversalGarbage  *garbage = newUniversalGarbage();
 
     CTextArray * elementos  = CTextArray_split(rota,"/");
-    UniversalGarbage_add(garbage,stack_array.free, elementos);
+    UniversalGarbage_add(garbage, CTextArray_free, elementos);
 
     if(elementos->size != 4){
 

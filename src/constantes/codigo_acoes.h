@@ -2,3 +2,7 @@
 #define ACAO_EXTRATO  1
 #define ACAO_TRANSACAO 2
 
+
+
+#define CODIGO_DEBITO 3
+#define CODIGO_CREDITO 4
