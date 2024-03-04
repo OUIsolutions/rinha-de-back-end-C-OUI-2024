@@ -1,7 +1,7 @@
 
 
 RotaParser  parsear_rota(const char *rota){
-    RotaParser criada = {0};
+    RotaParser rota_obj = {0};
 
     UniversalGarbage  *garbage = newUniversalGarbage();
 
@@ -11,31 +11,31 @@ RotaParser  parsear_rota(const char *rota){
     if(elementos->size != 4){
 
         UniversalGarbage_free(garbage);
-        criada.invalida = true;
-        return criada;
+        rota_obj.invalida = true;
+        return rota_obj;
     }
     if(strcmp(elementos->stacks[1]->rendered_text,CLIENTES) != 0){
         UniversalGarbage_free(garbage);
-        criada.invalida = true;
-        return criada;
+        rota_obj.invalida = true;
+        return rota_obj;
     }
-    criada.id_cliente = elementos->stacks[2]->rendered_text;
+    rota_obj.id_cliente = elementos->stacks[2]->rendered_text;
 
     if(strcmp(elementos->stacks[3]->rendered_text,EXTRATO) == 0){
-        criada.acao = ACAO_EXTRATO;
+        rota_obj.acao = ACAO_EXTRATO;
     }
 
     if(strcmp(elementos->stacks[3]->rendered_text,TRANSACOES) == 0){
-        criada.acao = ACAO_TRANSACAO;
+        rota_obj.acao = ACAO_TRANSACAO;
     }
 
 
 
 
-    if(!criada.acao){
-        criada.invalida = true;
+    if(!rota_obj.acao){
+        rota_obj.invalida = true;
     }
 
 
-    return  criada;
+    return  rota_obj;
 }
