@@ -38,6 +38,15 @@ CHashArray  * obter_clientes_default(){
 void cria_clientes_inicias(){
     UniversalGarbage  *garbage = newUniversalGarbage();
     DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
+
+#ifdef DEBUG
+    DtwResource_destroy(banco);
+#else
+    if(DtwResource_type(banco) != DTW_NOT_FOUND){
+        return;
+    }
+#endif
+
     UniversalGarbage_add(garbage, DtwResource_free,banco);
 
     CHashArray  *clientes =obter_clientes_default();

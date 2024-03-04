@@ -23,8 +23,19 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
         cJSON *ultima = cJSON_GetArrayItem(lista_transacoes,total_transacoes -1);
         id_transacao = ultima->valueint+1;
     }
-    cJSON_AddItemToArray(lista_transacoes, cJSON_CreateNumber(id_transacao));
 
+    DtwResource *resource_transacaos = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
+
+
+    cJSON_AddItemToArray(lista_transacoes, cJSON_CreateNumber(id_transacao));
+    total_transacoes+=1;
+    if(total_transacoes >10){
+        int primeiro = cJSON_GetArrayItem(lista_transacoes,0)->valueint;
+        DtwResource *transacao_mais_antiga = DtwResource_sub_resource(resource_transacaos,"%d",primeiro);
+        DtwResource_destroy(transacao_mais_antiga);
+        
+        cJSON_DeleteItemFromArray(lista_transacoes,0);
+    }
 
     //definindo as resources
     char *json_transacao_str = cJSON_PrintUnformatted(json_transacao);
@@ -34,7 +45,6 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     char *dados_str = cJSON_PrintUnformatted(dados);
     UniversalGarbage_add_simple(garbage, dados_str);
 
-    DtwResource *resource_transacaos = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
     DtwResource_set_string_in_sub_resource(resource_transacaos,json_transacao_str,"%d",id_transacao);
     DtwResource_set_string_in_sub_resource(id_cliente, dados_str, CAMINHO_DADOS);
     DtwResource_commit(banco);
