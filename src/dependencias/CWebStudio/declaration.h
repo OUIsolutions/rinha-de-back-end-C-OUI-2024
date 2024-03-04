@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <signal.h>
 #include <sys/resource.h>
+#include <time.h>
 
 #include <arpa/inet.h>
 #include <unistd.h>
