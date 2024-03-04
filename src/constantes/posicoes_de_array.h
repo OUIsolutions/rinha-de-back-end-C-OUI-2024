@@ -7,3 +7,4 @@
 
 #define VALOR_INDEX 0
 #define DATA_INDEX 1
+#define DESCRICAO_INDEX 2

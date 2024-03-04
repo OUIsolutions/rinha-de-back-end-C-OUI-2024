@@ -4,3 +4,4 @@
 #include "transacoes/parseamento.c"
 #include "transacoes/transacoes.c"
 #include "transacoes/escrita.c"
+#include "extrato/extrato.c"
