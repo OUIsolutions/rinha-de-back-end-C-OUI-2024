@@ -19,7 +19,6 @@ RotaParser  parsear_rota(const char *rota){
         rota_obj.invalida = true;
         return rota_obj;
     }
-    rota_obj.id_cliente = elementos->stacks[2]->rendered_text;
 
     if(strcmp(elementos->stacks[3]->rendered_text,EXTRATO) == 0){
         rota_obj.acao = ACAO_EXTRATO;
@@ -29,13 +28,14 @@ RotaParser  parsear_rota(const char *rota){
         rota_obj.acao = ACAO_TRANSACAO;
     }
 
-
-
-
     if(!rota_obj.acao){
+        UniversalGarbage_free(garbage);
         rota_obj.invalida = true;
+        return rota_obj;
     }
 
-
+    rota_obj.id_cliente = strdup(elementos->stacks[2]->rendered_text);
+    UniversalGarbage_free(garbage);
     return  rota_obj;
 }
+

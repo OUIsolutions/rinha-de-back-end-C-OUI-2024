@@ -2,7 +2,7 @@
 
 typedef struct {
     bool  invalida;
-    const char *id_cliente;
+     char *id_cliente;
     short  acao;
 } RotaParser;
 
