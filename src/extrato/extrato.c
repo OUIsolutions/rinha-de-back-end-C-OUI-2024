@@ -36,7 +36,7 @@ CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,Dtw
 
     cJSON *array_transacao = NULL;
     UniversalGarbage_add(garbage, cJSON_Delete,array_transacao);
-    for(int i =ultima_transacao; i >= ultima_transacao - total_transacoes; i--){
+    for(int i =ultima_transacao; i >= (ultima_transacao+1) - total_transacoes; i--){
 
         char * texto_transacao = DtwResource_get_string_from_sub_resource(pasta_transacoes,"%d",i);
 
