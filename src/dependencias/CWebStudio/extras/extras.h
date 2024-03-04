@@ -12,5 +12,4 @@ const char *cweb_generate_content_type(const char *file_name);
 char *private_cweb_convert_url_encoded_text(const char *text);
 
 
-void  private_cweb_ms_sleep(long msec);
 

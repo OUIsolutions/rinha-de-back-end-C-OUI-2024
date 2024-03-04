@@ -63,24 +63,6 @@ unsigned char *cweb_load_binary_content(const char * path,int *size){
 
 
 
-void  private_cweb_ms_sleep(long msec){
-    struct timespec ts;
-    int res;
-
-    if (msec < 0)
-    {
-        errno = EINVAL;
-        return;
-    }
-
-    ts.tv_sec = msec / 1000;
-    ts.tv_nsec = (msec % 1000) * 1000000;
-
-    do {
-        res = nanosleep(&ts, &ts);
-    } while (res && errno == EINTR);
-
-}
 const char *cweb_generate_content_type(const char *file_name){
         int file_name_size = strlen(file_name);
 

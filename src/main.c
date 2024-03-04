@@ -23,6 +23,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
     DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
     banco->root_props->locker->total_checks = TOTAL_LOCK_CHECKS;
+    banco->root_props->locker->fail_delay = PUNICAO_DO_LOCKER;
     UniversalGarbage_add(garbage, DtwResource_free,banco);
 
     DtwResource *cliente = DtwResource_sub_resource(banco,rota_obj.id_cliente);
