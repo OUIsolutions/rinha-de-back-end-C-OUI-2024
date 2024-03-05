@@ -24,7 +24,6 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
 
     UniversalGarbage_add(garbage, DtwResource_free,banco);
-
     DtwResource *cliente = DtwResource_sub_resource(banco,rota_obj.id_cliente);
     if(DtwResource_type(cliente) == DTW_NOT_FOUND){
         UniversalGarbage_free(garbage);
