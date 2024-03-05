@@ -4,7 +4,7 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
     UniversalGarbage *garbage = newUniversalGarbage();
 
-    DtwResource_lock(id_cliente);
+    while(DtwResource_lock(id_cliente));
 
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
