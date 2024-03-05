@@ -7,8 +7,7 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     }
     //isso é importante para evitar problemas de concorrência
     UniversalGarbage *garbage = newUniversalGarbage();
-    DtwLocker * locker = bloqueia_x_vezes(id_cliente->path);
-    UniversalGarbage_add(garbage, DtwLocker_free,locker);
+    DtwResource_lock(id_cliente);
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
 

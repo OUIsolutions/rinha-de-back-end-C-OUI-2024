@@ -11,4 +11,3 @@ char * convert_inteiro_para_data_em_str(long int unix_time){
     strftime(time_string, 100, "%Y-%m-%dT%H:%M:%S", timeinfo);
     return time_string;
 }
-DtwLocker  * bloqueia_x_vezes(const char *target_lock);

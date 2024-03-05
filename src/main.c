@@ -38,6 +38,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     if(rota_obj.acao == ACAO_EXTRATO){
         resposta = gera_extrato(cliente);
     }
+
     UniversalGarbage_free(garbage);
     return resposta;
 
