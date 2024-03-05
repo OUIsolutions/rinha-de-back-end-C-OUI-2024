@@ -22,8 +22,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_text(ROTA_INVALIDA, INCONSISTENCIA);
     }
     DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
-    banco->root_props->locker->total_checks = TOTAL_LOCK_CHECKS;
-    banco->root_props->locker->fail_delay = PUNICAO_DO_LOCKER;
+
     UniversalGarbage_add(garbage, DtwResource_free,banco);
 
     DtwResource *cliente = DtwResource_sub_resource(banco,rota_obj.id_cliente);
@@ -37,7 +36,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         resposta = gera_transacao(request,banco,cliente);
     }
     if(rota_obj.acao == ACAO_EXTRATO){
-        resposta = gera_extrato(request,banco,cliente);
+        resposta = gera_extrato(cliente);
     }
     UniversalGarbage_free(garbage);
     return resposta;

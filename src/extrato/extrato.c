@@ -1,11 +1,14 @@
 
 
-CwebHttpResponse  * gera_extrato(CwebHttpRequest *request,DtwResource *banco,DtwResource *id_cliente){
-    DtwResource_lock(id_cliente);
+CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
+
+    UniversalGarbage *garbage = newUniversalGarbage();
+
+    DtwLocker * locker = bloqueia_x_vezes(id_cliente->path);
+    UniversalGarbage_add(garbage, DtwLocker_free,locker);
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
 
-    UniversalGarbage *garbage = newUniversalGarbage();
     cJSON *dados = cJSON_Parse(dados_str);
     UniversalGarbage_add(garbage, cJSON_Delete,dados);
 
