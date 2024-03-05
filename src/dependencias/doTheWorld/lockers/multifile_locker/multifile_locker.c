@@ -1,13 +1,12 @@
 
 
-DtwLocker *newDtwLocker(){
-    DtwLocker *self = (DtwLocker*) malloc(sizeof (DtwLocker));
+DtwMultiFileLocker *newDtwMultiFileLocker(){
+    DtwMultiFileLocker *self = (DtwMultiFileLocker*) malloc(sizeof (DtwMultiFileLocker));
 
     self->process = getpid();
-    self->total_checks = DTW_LOCKER_TOTAL_CHECK;
-    self->max_lock_time = DTW_LOCKER_MAX_TIMEOUT;
-    self->max_wait = DTW_LOCKER_MAX_WAIT;
-    self->fail_delay = DTW_LOCKER_FAIL_INTERVAL_MAX;
+    self->total_checks = DTW_MULTIFILE_LOCKER_TOTAL_CHECK;
+    self->max_lock_time = DTW_MULTIFILE_LOCKER_MAX_TIMEOUT;
+    self->max_wait = DTW_MULFILE_LOCKER_MAX_WAIT;
     self->locked_elements = newDtwStringArray();
 
     return self;
@@ -16,7 +15,7 @@ DtwLocker *newDtwLocker(){
 
 
 
-int  DtwLocker_lock(DtwLocker *self, const char *element) {
+int  DtwMultiFIleLocker_lock(DtwMultiFileLocker *self, const char *element) {
 
     if(DtwStringArray_find_position(self->locked_elements,element) != -1){
         return DTW_LOCKER_LOCKED;
@@ -36,11 +35,6 @@ int  DtwLocker_lock(DtwLocker *self, const char *element) {
         if((now - started_time) > self->max_wait){
             free(file);
             return DTW_LOCKER_WAIT_ERROR;
-        }
-        if(tota_execution> 0){
-            srand(tota_execution + now + getpid());
-            int sleep_time = rand()%self->fail_delay;
-            private_dtw_msleep(sleep_time);
         }
 
         tota_execution+=1;
@@ -90,7 +84,7 @@ int  DtwLocker_lock(DtwLocker *self, const char *element) {
 
 }
 
-void DtwLocker_unlock( DtwLocker *self, const  char *element){
+void DtwMultifileLocker_unlock(DtwMultiFileLocker *self, const  char *element){
     bool found = false;
     for(long i = 0; i < self->locked_elements->size;i++){
         if(strcmp(self->locked_elements->strings[i],element)==0){
@@ -113,7 +107,7 @@ void DtwLocker_unlock( DtwLocker *self, const  char *element){
 }
 
 
-void DtwLocker_represemt( DtwLocker *self){
+void DtwMultiFileLocker_represemt(DtwMultiFileLocker *self){
     printf("locked:\n");
     for(int i = 0 ; i < self->locked_elements->size;i++){
         char *element = self->locked_elements->strings[i];
@@ -123,11 +117,11 @@ void DtwLocker_represemt( DtwLocker *self){
     }
 }
 
-void DtwLocker_free( DtwLocker *self){
+void DtwMultiFileLocker_free(DtwMultiFileLocker *self){
 
     for(int i = 0 ; i < self->locked_elements->size;i++){
         char *element = self->locked_elements->strings[i];
-        DtwLocker_unlock(self,element);
+        DtwMultifileLocker_unlock(self, element);
     }
 
     DtwStringArray_free(self->locked_elements);
