@@ -12,6 +12,9 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
+    DtwResource_catch(id_cliente){
+        printf("%s\n", DtwResource_get_error_message(id_cliente));
+    }
 
     cJSON *dados = cJSON_Parse(dados_str);
     UniversalGarbage_add(garbage, cJSON_Delete,dados);
@@ -46,7 +49,9 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
     for(int i =ultima_transacao; i >= (ultima_transacao+1) - total_transacoes; i--){
 
         char * texto_transacao = DtwResource_get_string_from_sub_resource(pasta_transacoes,"%d",i);
-
+        DtwResource_catch(id_cliente){
+            printf("%s\n", DtwResource_get_error_message(id_cliente));
+        }
         array_transacao = cJSON_Parse(texto_transacao);
         UniversalGarbage_resset(garbage,array_transacao);
 
