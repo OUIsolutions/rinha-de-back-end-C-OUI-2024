@@ -1,4 +1,4 @@
-
+/*
 void  bloqueia_em_fila(DtwResource  *target){
 
     UniversalGarbage  *garbage = newUniversalGarbage();
@@ -72,3 +72,4 @@ void  bloqueia_em_fila(DtwResource  *target){
 
 
 }
+*/
