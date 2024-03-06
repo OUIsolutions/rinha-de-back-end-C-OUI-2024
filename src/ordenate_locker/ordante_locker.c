@@ -22,8 +22,8 @@ void  bloqueia_em_fila(DtwResource  *target){
         DtwResource_lock(target);
 
 
-        if(total_suscess > 10){
-            printf("soltou \n");
+        if(total_suscess > TOTAL_CHCECKS){
+            //printf("soltou \n");
             UniversalGarbage_free(garbage);
             return;
         }
