@@ -42,9 +42,16 @@ void  bloqueia_em_fila(DtwResource  *target,struct timeval inicio,const char *fi
         }
 
         total_suscess = 0;
-        //significa que o pid concorrente morreu
+        //significa que o arquivo não existe
         if(pid_concoorente == -1){
-            printf("pid concorrente morreu\n");
+            printf("pid concorrente não existe\n");
+            dtw_write_long_file_content(locker_descriptor_file->rendered_text,proprio_pid);
+            DtwResource_unlock(target);
+            dorme_milisegundos(ESPERA_PELA_LUZ_MS);
+            continue;
+        }
+        if(getpgid(pid_concoorente) <0){
+            printf("pid concorrente não existe\n");
             dtw_write_long_file_content(locker_descriptor_file->rendered_text,proprio_pid);
             DtwResource_unlock(target);
             dorme_milisegundos(ESPERA_PELA_LUZ_MS);
