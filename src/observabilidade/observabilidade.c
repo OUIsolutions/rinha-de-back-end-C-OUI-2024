@@ -36,20 +36,18 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
     UniversalGarbage_add(garbage, cJSON_Delete,data);
     cJSON_AddNumberToObject(data,"status",resposta->status_code);
     if(resposta->content_length){
-            char *readed_contnt = (char*)malloc(resposta->content_length);
-            UniversalGarbage_add_simple(garbage,readed_contnt);
-            memccpy(readed_contnt,resposta->content,sizeof (char),resposta->content_length);
-            readed_contnt[resposta->content_length] = '\0';
-
-            cJSON *parsed = cJSON_Parse(readed_contnt);
+            char *resposta_formatada = (char*)malloc(resposta->content_length+2);
+            UniversalGarbage_add_simple(garbage,resposta_formatada);
+            memcpy(resposta_formatada,resposta->content,resposta->content_length);
+            resposta_formatada[resposta->content_length] = '\0';
+            cJSON *parsed = cJSON_Parse(resposta_formatada);
             if(parsed){
-                cJSON_AddItemToObject(data,"json_body",parsed);
+                    cJSON_AddItemToObject(data,"json_body",parsed);
             }
             if(!parsed){
-                cJSON_AddStringToObject(data,"body",readed_contnt);
+                cJSON_AddStringToObject(data,"body",resposta_formatada);
             }
-        }
-
+    }
 
     char *result = cJSON_Print(data);
     UniversalGarbage_add_simple(garbage,result);

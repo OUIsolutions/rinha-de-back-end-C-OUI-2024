@@ -2,20 +2,7 @@
 #include "declaration.h"
 #include "definition.h"
 
-
-CwebHttpResponse *main_sever(CwebHttpRequest *request ){
-
-#ifdef  OBSERVAR
-    plotar_request_corrente(request);
-#endif
-
-#ifdef DEBUG
-    //rota para avaliar se gerou algum tipo de memory leah
-    if(strcmp(request->route,"/end") ==0){
-        cweb_kill_single_process_server();
-        return cweb_send_text("aplicação terminada",200);
-    }
-#endif
+CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
     UniversalGarbage  *garbage = newUniversalGarbage();
     RotaParser rota_obj = parsear_rota(request->route);
     UniversalGarbage_add_simple(garbage,rota_obj.id_cliente);
@@ -43,11 +30,28 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
     UniversalGarbage_free(garbage);
 
+    return resposta;
+
+
+}
+CwebHttpResponse *main_sever(CwebHttpRequest *request ){
+
+#ifdef  OBSERVAR
+    plotar_request_corrente(request);
+#endif
+
+#ifdef DEBUG
+    //rota para avaliar se gerou algum tipo de memory leah
+    if(strcmp(request->route,"/end") ==0){
+        cweb_kill_single_process_server();
+        return cweb_send_text("aplicação terminada",200);
+    }
+#endif
+    CwebHttpResponse *resposta = roda_servidor(request);
 #ifdef  OBSERVAR
     plotar_resposta_corrente(resposta);
 #endif
-    return resposta;
-
+    return  resposta;
 }
 
 int main(int argc, char *argv[]){
