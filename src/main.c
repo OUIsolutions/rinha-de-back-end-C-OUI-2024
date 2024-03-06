@@ -47,7 +47,6 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
 }
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
-    cria_namespaces();
 #ifdef  OBSERVAR
     plotar_request_corrente(request);
 #endif
@@ -60,16 +59,17 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 #endif
     CwebHttpResponse *resposta = roda_servidor(request);
+
 #ifdef  OBSERVAR
     plotar_resposta_corrente(resposta);
 #endif
+
     return  resposta;
 }
 
 int main(int argc, char *argv[]){
-
-    cria_clientes_inicias();;
-
+    cria_namespaces();
+    cria_clientes_inicias();
 
 
     dtw_remove_any("requisicoes");
