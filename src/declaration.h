@@ -4,3 +4,4 @@
 #include "criacao_de_clientes/criacao_de_clientes.h"
 #include "transacoes/transacoes.h"
 #include "extrato/extrato.h"
+#include "observabilidade/observabilidade.h"

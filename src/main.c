@@ -5,6 +5,9 @@
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 
+#ifdef  OBSERVAR
+    plotar_request_corrente(request);
+#endif
 
 #ifdef DEBUG
     //rota para avaliar se gerou algum tipo de memory leah

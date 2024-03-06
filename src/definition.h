@@ -5,3 +5,4 @@
 #include "transacoes/transacoes.c"
 #include "transacoes/escrita.c"
 #include "extrato/extrato.c"
+#include "observabilidade/observabilidade.c"
