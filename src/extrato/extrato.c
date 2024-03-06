@@ -3,6 +3,12 @@
 CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
     UniversalGarbage *garbage = newUniversalGarbage();
+    DtwResource_lock(id_cliente);
+
+    #ifdef  OBSERVAR
+        adiquiriu_a_luz = true;
+                momento_da_luz_adiquirida = retorna_microsegundos();
+    #endif
 
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 

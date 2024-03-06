@@ -6,3 +6,4 @@
 #include "transacoes/escrita.c"
 #include "extrato/extrato.c"
 #include "observabilidade/observabilidade.c"
+#include "ordenate_locker/ordante_locker.c"

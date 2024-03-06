@@ -19,12 +19,7 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
     UniversalGarbage_add(garbage, DtwResource_free,banco);
     DtwResource *cliente = DtwResource_sub_resource(banco,rota_obj.id_cliente);
-    DtwResource_lock(cliente);
 
-    #ifdef  OBSERVAR
-        adiquiriu_a_luz = true;
-        momento_da_luz_adiquirida = retorna_microsegundos();
-    #endif
 
     if(DtwResource_type(cliente) == DTW_NOT_FOUND){
         UniversalGarbage_free(garbage);
