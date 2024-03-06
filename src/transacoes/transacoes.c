@@ -13,9 +13,9 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     UniversalGarbage_add(garbage, DtwMultiFileLocker_free,locker);
     locker->max_wait = 60;
     locker->total_checks = 600;
-    */
+    
     DtwMultiFIleLocker_lock(locker,id_cliente->path);
-
+    */
 
 
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
