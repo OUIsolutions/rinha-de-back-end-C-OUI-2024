@@ -35,6 +35,7 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
     UniversalGarbage_free(garbage);
     if(adiquiriu_a_luz){
         momento_da_luz_liberada = retorna_microsegundos();
+        liberou_a_luz = true;
     }
 
     return resposta;

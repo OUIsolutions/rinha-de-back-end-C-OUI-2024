@@ -35,6 +35,20 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
     cJSON  * data = cJSON_CreateObject();
     UniversalGarbage_add(garbage, cJSON_Delete,data);
     cJSON_AddNumberToObject(data,"status",resposta->status_code);
+    if(adiquiriu_a_luz){
+        cJSON *adiquiriu = cJSON_CreateObject();
+        cJSON_AddItemToObject(data,"luz_adiquirida",adiquiriu);
+        cJSON_AddNumberToObject(adiquiriu,"segundos",momento_da_luz_adiquirida.tv_sec);
+        cJSON_AddNumberToObject(adiquiriu,"nanosegundos",momento_da_luz_adiquirida.tv_usec);
+    }
+    if(liberou_a_luz){
+        cJSON *liberou = cJSON_CreateObject();
+        cJSON_AddItemToObject(data,"luz_liberada",liberou);
+        cJSON_AddNumberToObject(liberou,"segundos",momento_da_luz_liberada.tv_sec);
+        cJSON_AddNumberToObject(liberou,"nanosegundos",momento_da_luz_liberada.tv_usec);
+    }
+
+
     if(resposta->content_length){
             char *resposta_formatada = (char*)malloc(resposta->content_length+2);
             UniversalGarbage_add_simple(garbage,resposta_formatada);
