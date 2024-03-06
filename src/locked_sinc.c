@@ -10,13 +10,9 @@ const char *target = "a.txt";
 
 void append_once(int num){
 
-    DtwLocker  *locker = newDtwLocker();
-    DtwLocker_lock(locker,target);
+
     DtwResource *r = new_DtwResource(target);
-
-
-   // while(DtwResource_lock(r));
-
+    DtwResource_lock(r);;
     char *result = DtwResource_get_string(r);
 
     CTextStack * formated = newCTextStack_string_format("%s%d\n",result,num);
@@ -25,7 +21,6 @@ void append_once(int num){
     CTextStack_free(formated);
     DtwResource_commit(r);
     DtwResource_free(r);
-    DtwLocker_free(locker);
     /*
     DtwLocker  *locker = newDtwLocker();
     DtwLocker_lock(locker,target);
