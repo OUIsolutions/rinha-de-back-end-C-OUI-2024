@@ -3,6 +3,7 @@
 database
 # Object files
 b
+requisicoes
 *.o
 *.ko
 *.obj
