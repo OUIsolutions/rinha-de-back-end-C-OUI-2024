@@ -22,7 +22,7 @@ void  bloqueia_em_fila(DtwResource  *target){
         DtwResource_lock(target);
 
 
-        if(total_suscess > 40){
+        if(total_suscess > 10){
             printf("soltou \n");
             UniversalGarbage_free(garbage);
             return;
@@ -60,7 +60,7 @@ void  bloqueia_em_fila(DtwResource  *target){
         }
 
         if(proprio_pid < pid_concoorente){
-            printf("nosso pid é mais antigo%d vs %d\n",proprio_pid,pid_concoorente);
+           // printf("nosso pid é mais antigo%d vs %d\n",proprio_pid,pid_concoorente);
 
             dtw_write_long_file_content(locker_descriptor_file->rendered_text,proprio_pid);
             DtwResource_unlock(target);
