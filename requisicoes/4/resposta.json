@@ -1,7 +1,0 @@
-{
-	"status":	200,
-	"json_body":	{
-		"saldo":	60000,
-		"limite":	80000
-	}
-}

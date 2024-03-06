@@ -1,8 +1,0 @@
-{
-	"rota":	"/clientes/2/transacoes",
-	"json_body":	{
-		"descricao":	"0123456789",
-		"valor":	20000,
-		"tipo":	"c"
-	}
-}
