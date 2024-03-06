@@ -10,30 +10,16 @@ const char *target = "a.txt";
 
 void append_once(int num){
 
-    DtwResource *target_r = new_DtwResource(target);
-    DtwResource_lock(target_r);
-   // printf("processo %d bloqueou\n",num);
+    DtwLocker  *locker = newDtwLocker();
+    DtwLocker_lock(locker,target);
+    char *result = dtw_load_string_file_content(target);
+    CTextStack * formated = newCTextStack_string_format("%s%d\n",result,num);
+    printf("%s\n",formated->rendered_text);
+    dtw_write_string_file_content(target,formated->rendered_text);
+    free(result);
+    CTextStack_free(formated);
+    DtwLocker_free(locker);
 
-    long size;
-    bool is_binary;
-    char *element = DtwResource_get_string()
-    //printf("%s\n",element);
-/*
-    char *formated = (char*) calloc(30000,sizeof(char*));
-    strcpy(formated,element);
-
-    char current_num[20];
-    sprintf(current_num,"%d\n",num);
-
-
-    for(int x = 0; x < creation_per_process; x++){
-        strcat(formated,current_num);
-    }
-
-    DtwResource_set_string(target_r,formated);
-  */
-    DtwResource_commit(target_r);
-    DtwResource_free(target_r);
 }
 
 int main(int argc, char *argv[]){
@@ -46,12 +32,11 @@ int main(int argc, char *argv[]){
     dtw_write_string_file_content(target,"");
 
     for(int i = 0; i < total_process; i ++){
-
-
-            append_once(i);
-        //    exit(0);
-
-
+            if(fork() == 0){
+                //printf("pegou aqui\n");
+                append_once(i);
+                exit(0);
+            }
     }
 
 
