@@ -122,8 +122,7 @@ unsigned char *dtw_load_any_content(const char * path,long *size,bool *is_binary
         fclose(file);
         return NULL;
     }
-
-    unsigned char *content = (unsigned char*)malloc(*size +1);
+    unsigned char *content = (unsigned char*)malloc(*size +2);
     int bytes_read = fread(content,1,*size,file);
     if(bytes_read <=0 ){
         free(content);
@@ -142,6 +141,7 @@ unsigned char *dtw_load_any_content(const char * path,long *size,bool *is_binary
     if(!*is_binary){
         content[*size] = '\0';
     }
+
 
     fclose(file);
     return content;

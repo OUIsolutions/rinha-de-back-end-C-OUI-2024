@@ -12,12 +12,12 @@ void append_once(int num){
 
     DtwResource *target_r = new_DtwResource(target);
     DtwResource_lock(target_r);
-    printf("processo %d bloqueou\n",num);
+   // printf("processo %d bloqueou\n",num);
 
-    int size;
+    long size;
     bool is_binary;
-    char *element = dtw_load_any_content(target,&size,&is_binary);
-
+    char *element = DtwResource_get_string()
+    //printf("%s\n",element);
 /*
     char *formated = (char*) calloc(30000,sizeof(char*));
     strcpy(formated,element);
