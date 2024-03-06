@@ -10,15 +10,22 @@ const char *target = "a.txt";
 
 void append_once(int num){
 
+    DtwLocker  *locker = newDtwLocker();
+    DtwLocker_lock(locker,target);
     DtwResource *r = new_DtwResource(target);
-    while(DtwResource_lock(r));
-    char *result = dtw_load_string_file_content(target);
+
+
+   // while(DtwResource_lock(r));
+
+    char *result = DtwResource_get_string(r);
+
     CTextStack * formated = newCTextStack_string_format("%s%d\n",result,num);
-    printf("%s\n",formated->rendered_text);
-    dtw_write_string_file_content(target,formated->rendered_text);
-    free(result);
+
+    DtwResource_set_string(r,formated->rendered_text);
     CTextStack_free(formated);
+    DtwResource_commit(r);
     DtwResource_free(r);
+    DtwLocker_free(locker);
     /*
     DtwLocker  *locker = newDtwLocker();
     DtwLocker_lock(locker,target);
@@ -39,14 +46,16 @@ int main(int argc, char *argv[]){
     creation_per_process = 1;
 
     dtw_remove_any(target);
-    dtw_write_string_file_content(target,"");
+    dtw_write_string_file_content(target," ");
 
     for(int i = 0; i < total_process; i ++){
-            if(fork() == 0){
                 //printf("pegou aqui\n");
-                append_once(i);
-                exit(0);
-            }
+                if(fork()==0){
+                    append_once(i);
+                    exit(0);
+                }
+
+
     }
 
 

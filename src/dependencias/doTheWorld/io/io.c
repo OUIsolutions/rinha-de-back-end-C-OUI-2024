@@ -114,6 +114,7 @@ unsigned char *dtw_load_any_content(const char * path,long *size,bool *is_binary
 
     if(*size == 0){
         fclose(file);
+        *size = 1;
         return (unsigned  char*)strdup("");
     }
 
