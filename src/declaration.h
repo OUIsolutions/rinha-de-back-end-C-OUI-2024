@@ -1,3 +1,4 @@
+#include "namespaces/namespaces.h"
 #include "constantes/constantes.h"
 #include "extra/extra.h"
 #include "rota_parser/rota_parser.h"

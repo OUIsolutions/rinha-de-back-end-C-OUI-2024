@@ -14,26 +14,6 @@ void  escreve_chash_em_sub_resource(DtwResource *resource,CHash *data){
     UniversalGarbage_free(garbage);
 }
 
-int dorme_milisegundos(long msec)
-{
-    struct timespec ts;
-    int res;
-
-    if (msec < 0)
-    {
-        errno = EINVAL;
-        return -1;
-    }
-
-    ts.tv_sec = msec / 1000;
-    ts.tv_nsec = (msec % 1000) * 1000000;
-
-    do {
-        res = nanosleep(&ts, &ts);
-    } while (res && errno == EINTR);
-
-    return res;
-}
 
 struct timeval retorna_microsegundos() {
     struct timeval tv;

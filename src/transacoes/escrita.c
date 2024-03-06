@@ -34,12 +34,12 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     ultima_transacao  = id_transacao;
     total_transacoes+=1;
 
-    DtwResource *resource_transacaos = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
+    DtwResource *resource_transacaos = resource.sub_resource(id_cliente,CAMINHO_TRANSACOES);
 
 
     if(total_transacoes  > MAXIMO_TRANSACOES){
         int primeiro = ultima_transacao - total_transacoes;
-        DtwResource *transacao_mais_antiga = DtwResource_sub_resource(resource_transacaos,"%d",primeiro);
+        DtwResource *transacao_mais_antiga = resource.sub_resource(resource_transacaos,"%d",primeiro);
         DtwResource_destroy(transacao_mais_antiga);
         total_transacoes-=1;
     }
@@ -56,9 +56,9 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     char *dados_str = cJSON_PrintUnformatted(dados);
     UniversalGarbage_add_simple(garbage, dados_str);
 
-    DtwResource_set_string_in_sub_resource(resource_transacaos,json_transacao_str,"%d",id_transacao);
-    DtwResource_set_string_in_sub_resource(id_cliente, dados_str, CAMINHO_DADOS);
-    DtwResource_commit(banco);
+    resource.set_string_in_sub_resource(resource_transacaos,json_transacao_str,"%d",id_transacao);
+    resource.set_string_in_sub_resource(id_cliente, dados_str, CAMINHO_DADOS);
+    resource.commit(banco);
     UniversalGarbage_free(garbage);
 
 }

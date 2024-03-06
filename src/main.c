@@ -13,17 +13,17 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
     if(rota_obj.invalida){
         UniversalGarbage_free(garbage);
-        return cweb_send_text(ROTA_INVALIDA, INCONSISTENCIA);
+        return cweb.response.send_text(ROTA_INVALIDA, INCONSISTENCIA);
     }
-    DtwResource *banco = new_DtwResource(CAMINHO_BANCO);
+    DtwResource *banco = resource.newResource(CAMINHO_BANCO);
 
     UniversalGarbage_add(garbage, DtwResource_free,banco);
-    DtwResource *cliente = DtwResource_sub_resource(banco,rota_obj.id_cliente);
+    DtwResource *cliente = resource.sub_resource(banco,rota_obj.id_cliente);
 
 
     if(DtwResource_type(cliente) == DTW_NOT_FOUND){
         UniversalGarbage_free(garbage);
-        return cweb_send_text(CLIENTE_NAO_EXIST,NAO_ENCONTRADO);
+        return cweb.response.send_text(CLIENTE_NAO_EXIST,NAO_ENCONTRADO);
     }
     CwebHttpResponse *resposta  = NULL;
 
@@ -47,7 +47,7 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
 }
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
-
+    cria_namespaces();
 #ifdef  OBSERVAR
     plotar_request_corrente(request);
 #endif
