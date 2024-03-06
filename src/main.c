@@ -42,12 +42,17 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 
     UniversalGarbage_free(garbage);
+
+#ifdef  OBSERVAR
+    plotar_resposta_corrente(resposta);
+#endif
     return resposta;
 
 }
 
 int main(int argc, char *argv[]){
     cria_clientes_inicias();
+    dtw_remove_any("requisicoes");
     #ifdef DEBUG
         for(int i = 3000;i < 4000; i++){
             CwebServer server = newCwebSever(i, main_sever);

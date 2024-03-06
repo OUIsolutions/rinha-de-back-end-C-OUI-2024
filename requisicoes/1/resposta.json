@@ -1,0 +1,11 @@
+{
+	"status":	200,
+	"json_body":	{
+		"saldo":	{
+			"total":	0,
+			"limite":	80000,
+			"data_extrato":	"2024-03-05T22:15:25"
+		},
+		"ultimas_transacoes":	[]
+	}
+}
