@@ -8,6 +8,8 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     //isso é importante para evitar problemas de concorrência
     UniversalGarbage *garbage = newUniversalGarbage();
     DtwResource_lock(id_cliente);
+    adiquiriu_a_luz = true;
+    momento_da_luz_adiquirida = retorna_microsegundos();
     /*
     DtwMultiFileLocker  *locker = newDtwMultiFileLocker();
     UniversalGarbage_add(garbage, DtwMultiFileLocker_free,locker);

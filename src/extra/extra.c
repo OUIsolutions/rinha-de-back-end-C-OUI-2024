@@ -15,3 +15,8 @@ void  escreve_chash_em_sub_resource(DtwResource *resource,CHash *data){
 }
 
 
+struct timeval retorna_microsegundos() {
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return tv;
+}

@@ -2,6 +2,7 @@
 
 
 #include "dependencias/dependencias.h"
+#include "globais.h"
 #include "declaration.h"
 #include "definition.h"
 
@@ -32,6 +33,9 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
     }
 
     UniversalGarbage_free(garbage);
+    if(adiquiriu_a_luz){
+        momento_da_luz_liberada = retorna_microsegundos();
+    }
 
     return resposta;
 
@@ -58,7 +62,11 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 }
 
 int main(int argc, char *argv[]){
-    cria_clientes_inicias();
+
+    cria_clientes_inicias();;
+
+
+
     dtw_remove_any("requisicoes");
     #ifdef DEBUG
         for(int i = 3000;i < 4000; i++){
