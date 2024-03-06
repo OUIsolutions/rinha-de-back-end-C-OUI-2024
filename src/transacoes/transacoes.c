@@ -16,9 +16,6 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
 
 
     char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
-    DtwResource_catch(banco){
-        printf("%s\n", DtwResource_get_error_message(banco));
-    }
 
     cJSON *dados = cJSON_Parse(dados_str);
     UniversalGarbage_add(garbage, cJSON_Delete,dados);

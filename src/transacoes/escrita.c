@@ -35,18 +35,13 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     total_transacoes+=1;
 
     DtwResource *resource_transacaos = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
-    DtwResource_catch(banco){
-        printf("%s\n", DtwResource_get_error_message(banco));
-    }
+
 
     if(total_transacoes  > MAXIMO_TRANSACOES){
         int primeiro = ultima_transacao - total_transacoes;
         DtwResource *transacao_mais_antiga = DtwResource_sub_resource(resource_transacaos,"%d",primeiro);
         DtwResource_destroy(transacao_mais_antiga);
         total_transacoes-=1;
-    }
-    DtwResource_catch(banco){
-        printf("%s\n", DtwResource_get_error_message(banco));
     }
 
 
