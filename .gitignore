@@ -3,6 +3,7 @@
 database
 # Object files
 b
+ordem_da_luz
 requisicoes
 *.o
 *.ko
