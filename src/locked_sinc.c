@@ -12,36 +12,14 @@ void append_once(int num){
 
 
     DtwResource *r = new_DtwResource(target);
-
-    DtwLocker  *locker = newDtwLocker();
-    DtwLocker_lock(locker,target);
-
-   // while(DtwResource_lock(r));
-
+    bloqueia_em_fila(r,retorna_microsegundos(),"a.txt");
     char *result = DtwResource_get_string(r);
-    DtwResource_catch(r){
-        printf("%s\n", DtwResource_get_error_message(r));
-    }
-
-
-    CTextStack * formated = newCTextStack_string_format("%s%d\n",result,num);
-
+    CTextStack * formated = newCTextStack_string_format("%s%d => %d\n",result,num,getpid());
     DtwResource_set_string(r,formated->rendered_text);
+
     CTextStack_free(formated);
     DtwResource_commit(r);
     DtwResource_free(r);
-    DtwLocker_free(locker);
-    /*
-    DtwLocker  *locker = newDtwLocker();
-    DtwLocker_lock(locker,target);
-    char *result = dtw_load_string_file_content(target);
-    CTextStack * formated = newCTextStack_string_format("%s%d\n",result,num);
-    printf("%s\n",formated->rendered_text);
-    dtw_write_string_file_content(target,formated->rendered_text);
-    free(result);
-    CTextStack_free(formated);
-    DtwLocker_free(locker);
-    */
 }
 
 int main(int argc, char *argv[]){
@@ -54,12 +32,11 @@ int main(int argc, char *argv[]){
     dtw_write_string_file_content(target,"");
 
     for(int i = 0; i < total_process; i ++){
-                //printf("pegou aqui\n");
                 if(fork()==0){
                     append_once(i);
                     exit(0);
                 }
-
+        //printf("pegou aqui\n");
 
     }
 

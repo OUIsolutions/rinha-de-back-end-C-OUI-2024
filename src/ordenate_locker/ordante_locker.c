@@ -9,109 +9,56 @@ void  bloqueia_em_fila(DtwResource  *target,struct timeval inicio,const char *fi
     const int SECOND_INDEX = 1;
     const int NANO_INDEX = 2;
 
-    cJSON *proprio_lock_descriptor = cJSON_CreateArray();
-    UniversalGarbage_add(garbage, cJSON_Delete,proprio_lock_descriptor);
 
     int proprio_pid = getpid();
-    cJSON_AddItemToArray(proprio_lock_descriptor, cJSON_CreateNumber(proprio_pid));
-    cJSON_AddItemToArray(proprio_lock_descriptor, cJSON_CreateNumber(inicio.tv_sec));
-    cJSON_AddItemToArray(proprio_lock_descriptor, cJSON_CreateNumber(inicio.tv_usec));
 
-    char *locker_descriptor_file = dtw_concat_path(target->path,"locker");
-    UniversalGarbage_add_simple(garbage,locker_descriptor_file);
+    CTextStack * locker_descriptor_file = newCTextStack_string_format("%s.quue_locker",filename);
+    UniversalGarbage_add(garbage, CTextStack_free, locker_descriptor_file);
 
-    char *codigo_gerado = cJSON_PrintUnformatted(proprio_lock_descriptor);
-    UniversalGarbage_add_simple(garbage,codigo_gerado);
+    int pid_concoorente = 0;
 
-    char *conteudo_lock_descriptor_concorrente = NULL;
-    UniversalGarbage_add_simple(garbage,conteudo_lock_descriptor_concorrente);
-
-    cJSON * json_lock_descriptor_concorrente  = NULL;
-    UniversalGarbage_add(garbage, cJSON_Delete,json_lock_descriptor_concorrente);
-
-
+    int total_suscess = 0;
     while (true){
         DtwResource_lock(target);
 
-        conteudo_lock_descriptor_concorrente = dtw_load_string_file_content(locker_descriptor_file);
-        UniversalGarbage_resset(garbage,conteudo_lock_descriptor_concorrente);
-
-
-        if(!conteudo_lock_descriptor_concorrente){
-            dtw_write_string_file_content(locker_descriptor_file,codigo_gerado);
-            DtwResource_unlock(target);
-            dorme_milisegundos(ESPERA_PELA_LUZ_MS);
-            continue;
-        }
-        json_lock_descriptor_concorrente = cJSON_Parse(conteudo_lock_descriptor_concorrente);
-        UniversalGarbage_resset(garbage,json_lock_descriptor_concorrente);
-
-        if(!json_lock_descriptor_concorrente){
-            dtw_write_string_file_content(locker_descriptor_file,codigo_gerado);
-            DtwResource_unlock(target);
-            dorme_milisegundos(ESPERA_PELA_LUZ_MS);
-            continue;
-        }
-
-        int pid_concorrente = cJSON_GetArrayItem(json_lock_descriptor_concorrente,PID_INDEX)->valueint;
-        //significa que somos os mais antigos e nenhum outro processo sobrescreveu
-        //já que verificamos a partir do json que foi escrito
-        if(pid_concorrente == proprio_pid){
+        if(total_suscess > 5){
+            printf("soltou \n");
             UniversalGarbage_free(garbage);
             return;
         }
-        if(getpgid(pid_concorrente) < 0){
-            dtw_write_string_file_content(locker_descriptor_file,codigo_gerado);
+
+        pid_concoorente = dtw_load_long_file_content(locker_descriptor_file->rendered_text);
+
+
+        //significa que somos os mais antigos e nenhum outro processo sobrescreveu
+        //já que verificamos a partir do json que foi escrito
+        if(pid_concoorente == proprio_pid){
+            printf("esta bloqueado pela gente\n");
+
+            total_suscess+=1;
             DtwResource_unlock(target);
             dorme_milisegundos(ESPERA_PELA_LUZ_MS);
             continue;
         }
 
-        long segundo_do_bloqueio_concorrente = cJSON_GetArrayItem(json_lock_descriptor_concorrente,SECOND_INDEX)->valueint;
-        //significa que somos mais antigos então podemos roubar a luz e eseprar
-        // para ver se alguém não roubou nossa luz
-        if(inicio.tv_sec < segundo_do_bloqueio_concorrente  ){
-            dtw_write_string_file_content(locker_descriptor_file,codigo_gerado);
-            DtwResource_unlock(target);
-            dorme_milisegundos(ESPERA_PELA_LUZ_MS);
-            continue;
-        }
-        //sigifica que o concorrente é mais antigo então durmimos esperamos nossavez
-        if(inicio.tv_sec > segundo_do_bloqueio_concorrente){
-            DtwResource_unlock(target);
-            dorme_milisegundos(ESPERA_PELA_LUZ_MS);
-        }
-        long concorrente_nano_segundos = cJSON_GetArrayItem(json_lock_descriptor_concorrente,NANO_INDEX)->valueint;
-
-        //aqui iremos disputar os nanosegundos
-
-        //significa que somos mais antigos então podemos roubar a luz e eseprar
-        // para ver se alguém não roubou nossa luz
-        if(inicio.tv_usec < concorrente_nano_segundos){
-            dtw_write_string_file_content(locker_descriptor_file,codigo_gerado);
-            DtwResource_unlock(target);
-            dorme_milisegundos(ESPERA_PELA_LUZ_MS);
-            continue;
-        }
-        //sigifica que o concorrente é mais antigo então durmimos esperamos nossavez
-
-        if(inicio.tv_usec > concorrente_nano_segundos){
+        total_suscess = 0;
+        //significa que o pid concorrente morreu
+        if(pid_concoorente == -1){
+            printf("pid concorrente morreu\n");
+            dtw_write_long_file_content(locker_descriptor_file->rendered_text,proprio_pid);
             DtwResource_unlock(target);
             dorme_milisegundos(ESPERA_PELA_LUZ_MS);
             continue;
         }
 
+        if(proprio_pid < pid_concoorente){
+            printf("nosso pid é mais antigo\n");
 
-        //aqui é uma possibilidade hipotética,mas vou tentar cobrir
-        //se tudo for igual, ganha o pid menor
-        if(proprio_pid <= pid_concorrente){
-            dtw_write_string_file_content(locker_descriptor_file,codigo_gerado);
+            dtw_write_long_file_content(locker_descriptor_file->rendered_text,proprio_pid);
             DtwResource_unlock(target);
             dorme_milisegundos(ESPERA_PELA_LUZ_MS);
             continue;
         }
-
-
     }
 
 
