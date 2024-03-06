@@ -12,8 +12,17 @@ void append_once(int num){
 
 
     DtwResource *r = new_DtwResource(target);
-    DtwResource_lock(r);;
+
+    DtwLocker  *locker = newDtwLocker();
+    DtwLocker_lock(locker,target);
+
+   // while(DtwResource_lock(r));
+
     char *result = DtwResource_get_string(r);
+    DtwResource_catch(r){
+        printf("%s\n", DtwResource_get_error_message(r));
+    }
+
 
     CTextStack * formated = newCTextStack_string_format("%s%d\n",result,num);
 
@@ -21,6 +30,7 @@ void append_once(int num){
     CTextStack_free(formated);
     DtwResource_commit(r);
     DtwResource_free(r);
+    DtwLocker_free(locker);
     /*
     DtwLocker  *locker = newDtwLocker();
     DtwLocker_lock(locker,target);
@@ -41,7 +51,7 @@ int main(int argc, char *argv[]){
     creation_per_process = 1;
 
     dtw_remove_any(target);
-    dtw_write_string_file_content(target," ");
+    dtw_write_string_file_content(target,"");
 
     for(int i = 0; i < total_process; i ++){
                 //printf("pegou aqui\n");
