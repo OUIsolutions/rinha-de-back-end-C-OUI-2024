@@ -24,6 +24,7 @@ void DtwResource_set_binary(DtwResource *self, unsigned char *element, long size
 
 
 void DtwResource_set_string(DtwResource *self,const  char *element){
+    
     if(DtwResource_error(self)){
         return ;
     }
