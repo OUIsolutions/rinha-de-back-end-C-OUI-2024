@@ -3,7 +3,7 @@
 CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
     UniversalGarbage *garbage = newUniversalGarbage();
-    bloqueia_em_fila(id_cliente);
+    DtwResource_lock(id_cliente);
 
     #ifdef  OBSERVAR
         adiquiriu_a_luz = true;

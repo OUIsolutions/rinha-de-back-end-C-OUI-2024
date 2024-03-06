@@ -7,7 +7,7 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     }
     //isso é importante para evitar problemas de concorrência
     UniversalGarbage *garbage = newUniversalGarbage();
-    bloqueia_em_fila(id_cliente);
+    DtwResource_lock(id_cliente);
 
     #ifdef  OBSERVAR
         adiquiriu_a_luz = true;
