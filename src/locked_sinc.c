@@ -12,7 +12,7 @@ void append_once(int num){
 
 
     DtwResource *r = new_DtwResource(target);
-    bloqueia_em_fila(r,retorna_microsegundos(),"a.txt");
+    bloqueia_em_fila(r);
     char *result = DtwResource_get_string(r);
     CTextStack * formated = newCTextStack_string_format("%s%d => %d\n",result,num,getpid());
     DtwResource_set_string(r,formated->rendered_text);
