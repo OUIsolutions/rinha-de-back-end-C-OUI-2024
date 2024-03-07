@@ -1,8 +1,5 @@
 
 
-void  escreve_chash_em_sub_resource(DtwResource *element,CHash *data);
-
-
 
 char * convert_inteiro_para_data_em_str(long int unix_time){
     struct tm * timeinfo;

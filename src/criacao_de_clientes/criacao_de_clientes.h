@@ -1,4 +1,4 @@
 
-CHashArray  * obter_clientes_default();
+CxpathJson  * obter_clientes_default();
 
 void cria_clientes_inicias();
