@@ -7,6 +7,7 @@
 #include "definition.h"
 
 CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
+
     UniversalGarbage  *garbage = newUniversalGarbage();
     RotaParser rota_obj = parsear_rota(request->route);
     UniversalGarbage_add_simple(garbage,rota_obj.id_cliente);
@@ -41,8 +42,8 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
 }
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
+    int inicio = time(NULL);
     plotar_request_corrente(request);
-
 
 #ifdef DEBUG
     //rota para avaliar se gerou algum tipo de memory leah
@@ -53,7 +54,6 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 #endif
     CwebHttpResponse *resposta = roda_servidor(request);
     plotar_resposta_corrente(resposta);
-
     return  resposta;
 }
 

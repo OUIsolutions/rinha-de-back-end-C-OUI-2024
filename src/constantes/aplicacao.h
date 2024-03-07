@@ -11,6 +11,6 @@
 #define  IDENTAR false
 #endif
 #define MAXIMO_FILA 100000
-#define MAXIMO_REQUEST 2
+#define MAXIMO_REQUEST 5
 #define TIMEOUT_FUNCAO 60
 #define TIMEOUT_CLIENTE 60

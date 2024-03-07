@@ -38,7 +38,7 @@ void plotar_request_corrente(CwebHttpRequest *request){
 
 }
 
-void plotar_resposta_corrente(CwebHttpResponse *resposta){
+void plotar_resposta_corrente(int inicio,CwebHttpResponse *resposta){
 #ifndef  OBSERVAR
     return ;
 #endif
@@ -46,6 +46,8 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
     CxpathJson  * data = xpath.newJsonObject();
     UniversalGarbage_add(garbage, cJSON_Delete,data);
     xpath.set_int(data,resposta->status_code,"['status']");
+    xpath.set_int(data,inicio,"['inicio']");
+    xpath.set_int(data, time(NULL),"['fim']");
 
     if(adiquiriu_a_luz){
         xpath.set_int(data,momento_da_luz_adiquirida.tv_sec,"['luz','adiquirida','segundos']");
