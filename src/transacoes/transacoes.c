@@ -43,5 +43,5 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     cJSON *resposta_cjson = resposta->element;
     UniversalGarbage_free(garbage);
     return cweb_send_cJSON_cleaning_memory(resposta_cjson,RETORNO_OK);
-    
+
 }

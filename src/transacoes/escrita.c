@@ -1,31 +1,29 @@
 
 
-void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJSON *dados, int saldo,Transacao *transacao){
+void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, CxpathJson *dados, int saldo,Transacao *transacao){
 
     UniversalGarbage  *garbage = newUniversalGarbage();
 
     //adicionando o novo saldo
-    cJSON_ReplaceItemInArray(dados,SALDO_INDEX, cJSON_CreateNumber(saldo));
-
+    xpath.set_int(dados,saldo,"[%d]",SALDO_INDEX);
 
     //criando a transacao
-    cJSON *json_transacao = cJSON_CreateArray();
-    UniversalGarbage_add(garbage, cJSON_Delete,json_transacao);
+    CxpathJson  *json_transacao = xpath.newJsonArray();
+    UniversalGarbage_add(garbage, xpath.free,json_transacao);
+
     if(transacao->tipo == CODIGO_CREDITO){
-        cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(transacao->valor));
+        xpath.set_int(json_transacao,transacao->valor,"['$append']");
     }
     if(transacao->tipo== CODIGO_DEBITO){
-        cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(transacao->valor * -1));
-
+        xpath.set_int(json_transacao,transacao->valor* -1,"['$append']");
     }
-    cJSON_AddItemToArray(json_transacao, cJSON_CreateNumber(time(NULL)));
-    cJSON_AddItemToArray(json_transacao, cJSON_CreateString(transacao->descricao));
-
+    xpath.set_int(json_transacao, time(NULL),"['$append']");
+    xpath.set_str(json_transacao,transacao->descricao,"['$append']");
 
     int id_transacao = 0;
 
-    int total_transacoes  = cJSON_GetArrayItem(dados,TOTAL_TRANSACOES_INDEX)->valueint;
-    int ultima_transacao = cJSON_GetArrayItem(dados,ULTIMA_TRANSACAO_INDEX)->valueint;
+    int total_transacoes  = xpath.get_int(dados,"[%d]",TOTAL_TRANSACOES_INDEX);
+    int ultima_transacao = xpath.get_int(dados,"[%d]",ULTIMA_TRANSACAO_INDEX);
 
     if(total_transacoes > 0){
         id_transacao = ultima_transacao+1;
@@ -40,20 +38,19 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, cJS
     if(total_transacoes  > MAXIMO_TRANSACOES){
         int primeiro = ultima_transacao - total_transacoes;
         DtwResource *transacao_mais_antiga = resource.sub_resource(resource_transacaos,"%d",primeiro);
-        DtwResource_destroy(transacao_mais_antiga);
+        resource.destroy(transacao_mais_antiga);
         total_transacoes-=1;
     }
 
-
-    cJSON_ReplaceItemInArray(dados,TOTAL_TRANSACOES_INDEX, cJSON_CreateNumber(total_transacoes));
-    cJSON_ReplaceItemInArray(dados,ULTIMA_TRANSACAO_INDEX, cJSON_CreateNumber(ultima_transacao));
+    xpath.set_int(dados,total_transacoes,"[%d]",TOTAL_TRANSACOES_INDEX);
+    xpath.set_int(dados,ultima_transacao,"[%d]",ULTIMA_TRANSACAO_INDEX);
 
     //definindo as resources
-    char *json_transacao_str = cJSON_PrintUnformatted(json_transacao);
+    char *json_transacao_str = xpath.dump_to_string(json_transacao,false);
     UniversalGarbage_add_simple(garbage,json_transacao_str);
 
 
-    char *dados_str = cJSON_PrintUnformatted(dados);
+    char *dados_str = xpath.dump_to_string(dados,false);
     UniversalGarbage_add_simple(garbage, dados_str);
 
     resource.set_string_in_sub_resource(resource_transacaos,json_transacao_str,"%d",id_transacao);
