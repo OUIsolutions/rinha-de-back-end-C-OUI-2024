@@ -8,20 +8,16 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     //isso é importante para evitar problemas de concorrência
     UniversalGarbage *garbage = newUniversalGarbage();
     resource.lock(id_cliente);
-
-    #ifdef  OBSERVAR
-        adiquiriu_a_luz = true;
-            momento_da_luz_adiquirida = retorna_microsegundos();
-    #endif
+    marcar_obtencao_da_luz();
 
 
     char * dados_str = resource.get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
-    cJSON *dados = cJSON_Parse(dados_str);
-    UniversalGarbage_add(garbage, cJSON_Delete,dados);
+    CxpathJson  *dados = xpath.new_from_string(dados_str);
+    UniversalGarbage_add(garbage, xpath.free,dados);
 
-    int saldo = cJSON_GetArrayItem(dados,SALDO_INDEX)->valueint;
-    int limite = cJSON_GetArrayItem(dados,LIMITE_INDEX)->valueint;
+    int saldo = xpath.get_int(dados,"[%d]",SALDO_INDEX);
+    int limite = xpath.get_int(dados,"[%d]",LIMITE_INDEX);
     int saldo_full = saldo+limite;
 
     if(transacao.tipo == CODIGO_DEBITO){
@@ -39,12 +35,13 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     }
     escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao);
 
-    cJSON *resposta =cJSON_CreateObject();
-    cJSON_AddNumberToObject(resposta, SALDO_CHAVE, saldo);
-    cJSON_AddNumberToObject(resposta, LIMITE_CHAVE, limite);
+    CxpathJson  *resposta =xpath.newJsonObject();
+    UniversalGarbage_add(garbage,xpath.free,resposta);
+    resposta->element_reference = true;
+    xpath.set_int(resposta,saldo,"['%s']",SALDO_CHAVE);
+    xpath.set_int(resposta,limite,"['%s']",LIMITE_CHAVE);
+    cJSON *resposta_cjson = resposta->element;
     UniversalGarbage_free(garbage);
-    return cweb_send_cJSON_cleaning_memory(resposta,RETORNO_OK);
-
-
-
+    return cweb_send_cJSON_cleaning_memory(resposta_cjson,RETORNO_OK);
+    
 }
