@@ -35,21 +35,14 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
     }
 
     UniversalGarbage_free(garbage);
-#ifdef  OBSERVAR
-
-    if(adiquiriu_a_luz){
-        momento_da_luz_liberada = retorna_microsegundos();
-        liberou_a_luz = true;
-    }
-#endif
+    marcar_liberacao_da_luz();
     return resposta;
 
 
 }
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
-#ifdef  OBSERVAR
     plotar_request_corrente(request);
-#endif
+
 
 #ifdef DEBUG
     //rota para avaliar se gerou algum tipo de memory leah
@@ -59,10 +52,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 #endif
     CwebHttpResponse *resposta = roda_servidor(request);
-
-#ifdef  OBSERVAR
     plotar_resposta_corrente(resposta);
-#endif
 
     return  resposta;
 }

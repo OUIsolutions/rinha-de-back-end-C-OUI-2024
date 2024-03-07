@@ -1,6 +1,11 @@
 
 
 void plotar_request_corrente(CwebHttpRequest *request){
+
+#ifndef  OBSERVAR
+    return ;
+#endif
+
         UniversalGarbage  *garbage = newUniversalGarbage();
         cJSON  * data = cJSON_CreateObject();
         UniversalGarbage_add(garbage, cJSON_Delete,data);
@@ -31,6 +36,9 @@ void plotar_request_corrente(CwebHttpRequest *request){
 }
 
 void plotar_resposta_corrente(CwebHttpResponse *resposta){
+#ifndef  OBSERVAR
+    return ;
+#endif
     UniversalGarbage  *garbage = newUniversalGarbage();
     cJSON  * data = cJSON_CreateObject();
     UniversalGarbage_add(garbage, cJSON_Delete,data);
@@ -77,8 +85,23 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
 }
 
 void marcar_obtencao_da_luz(){
-#ifdef  OBSERVAR
-    adiquiriu_a_luz = true;
-        momento_da_luz_adiquirida = retorna_microsegundos();
+
+
+#ifndef  OBSERVAR
+    return ;
 #endif
+    adiquiriu_a_luz = true;
+    momento_da_luz_adiquirida = retorna_microsegundos();
+}
+
+void  marcar_liberacao_da_luz(){
+
+#ifndef  OBSERVAR
+    return ;
+#endif
+
+    if(adiquiriu_a_luz){
+        momento_da_luz_liberada = retorna_microsegundos();
+        liberou_a_luz = true;
+    }
 }
