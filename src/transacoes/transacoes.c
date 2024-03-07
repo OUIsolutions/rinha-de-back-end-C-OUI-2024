@@ -16,8 +16,8 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     CxpathJson  *dados = xpath.new_from_string(dados_str);
     UniversalGarbage_add(garbage, xpath.free,dados);
 
-    int saldo = xpath.get_int(dados,"[%d]",SALDO_INDEX);
-    int limite = xpath.get_int(dados,"[%d]",LIMITE_INDEX);
+    int saldo = xpath.get_int(dados,"['%s']",SALDO_CHAVE_BANCO);
+    int limite = xpath.get_int(dados,"['%s']",LIMITE_CHAVE_BANCO);
     int saldo_full = saldo+limite;
 
     if(transacao.tipo == CODIGO_DEBITO){

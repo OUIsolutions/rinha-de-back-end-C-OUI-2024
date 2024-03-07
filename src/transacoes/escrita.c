@@ -5,25 +5,27 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, Cxp
     UniversalGarbage  *garbage = newUniversalGarbage();
 
     //adicionando o novo saldo
-    xpath.set_int(dados,saldo,"[%d]",SALDO_INDEX);
+    xpath.set_int(dados,saldo,"['%s']",SALDO_CHAVE_BANCO);
 
     //criando a transacao
     CxpathJson  *json_transacao = xpath.newJsonArray();
     UniversalGarbage_add(garbage, xpath.free,json_transacao);
 
     if(transacao->tipo == CODIGO_CREDITO){
-        xpath.set_int(json_transacao,transacao->valor,"['$append']");
+        xpath.set_int(json_transacao,transacao->valor,"['%s']",VALOR_CHAVE_BANCO);
     }
+
     if(transacao->tipo== CODIGO_DEBITO){
-        xpath.set_int(json_transacao,transacao->valor* -1,"['$append']");
+        xpath.set_int(json_transacao,transacao->valor* -1,"['%s']",VALOR_CHAVE_BANCO);
     }
+
     xpath.set_int(json_transacao, time(NULL),"['$append']");
     xpath.set_str(json_transacao,transacao->descricao,"['$append']");
 
     int id_transacao = 0;
 
-    int total_transacoes  = xpath.get_int(dados,"[%d]",TOTAL_TRANSACOES_INDEX);
-    int ultima_transacao = xpath.get_int(dados,"[%d]",ULTIMA_TRANSACAO_INDEX);
+    int total_transacoes  = xpath.get_int(dados,"['%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    int ultima_transacao = xpath.get_int(dados,"['%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
 
     if(total_transacoes > 0){
         id_transacao = ultima_transacao+1;
@@ -42,8 +44,8 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, Cxp
         total_transacoes-=1;
     }
 
-    xpath.set_int(dados,total_transacoes,"[%d]",TOTAL_TRANSACOES_INDEX);
-    xpath.set_int(dados,ultima_transacao,"[%d]",ULTIMA_TRANSACAO_INDEX);
+    xpath.set_int(dados,total_transacoes,"['%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    xpath.set_int(dados,ultima_transacao,"['%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
 
     //definindo as resources
     char *json_transacao_str = xpath.dump_to_string(json_transacao,false);

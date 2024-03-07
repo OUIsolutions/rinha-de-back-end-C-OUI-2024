@@ -1,35 +1,32 @@
 
 CxpathJson * obter_clientes_default(){
     CxpathJson * started = xpath.newJsonArray();
-    xpath.set_int(started,0,"['$append','$append']"); //saldo
-    xpath.set_int(started,100000,"[-1,'$append']"); //limite
-    xpath.set_int(started,0,"[-1,'$append']"); //total transacoes
-    xpath.set_int(started,0,"[-1,'$append']"); // ultima transacao
+    xpath.set_int(started,0,"['$append','%s']",SALDO_CHAVE_BANCO);
+    xpath.set_int(started,100000,"[-1,'%s']",LIMITE_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
+
+    xpath.set_int(started,0,"['$append','%s']",SALDO_CHAVE_BANCO);
+    xpath.set_int(started,80000,"[-1,'%s']",LIMITE_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
 
 
+    xpath.set_int(started,0,"['$append','%s']",SALDO_CHAVE_BANCO);
+    xpath.set_int(started,1000000,"[-1,'%s']",LIMITE_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
 
-    xpath.set_int(started,0,"['$append','$append']"); //saldo
-    xpath.set_int(started,80000,"[-1,'$append']"); //limite
-    xpath.set_int(started,0,"[-1,'$append']"); //total transacoes
-    xpath.set_int(started,0,"[-1,'$append']"); // ultima transacao
+    xpath.set_int(started,0,"['$append','%s']",SALDO_CHAVE_BANCO);
+    xpath.set_int(started,10000000,"[-1,'%s']",LIMITE_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
 
-
-    xpath.set_int(started,0,"['$append','$append']"); //saldo
-    xpath.set_int(started,1000000,"[-1,'$append']"); //limite
-    xpath.set_int(started,0,"[-1,'$append']"); //total transacoes
-    xpath.set_int(started,0,"[-1,'$append']"); // ultima transacao
-
-    xpath.set_int(started,0,"['$append','$append']"); //saldo
-    xpath.set_int(started,10000000,"[-1,'$append']"); //limite
-    xpath.set_int(started,0,"[-1,'$append']"); //total transacoes
-    xpath.set_int(started,0,"[-1,'$append']"); // ultima transacao
-
-    xpath.set_int(started,0,"['$append','$append']"); //saldo
-    xpath.set_int(started,500000,"[-1,'$append']"); //limite
-    xpath.set_int(started,0,"[-1,'$append']"); //total transacoes
-    xpath.set_int(started,0,"[-1,'$append']"); // ultima transacao
-
-
+    xpath.set_int(started,0,"['$append','%s']",SALDO_CHAVE_BANCO);
+    xpath.set_int(started,500000,"[-1,'%s']",LIMITE_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    xpath.set_int(started,0,"[-1,'%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
+    
 
     return started;
 }
