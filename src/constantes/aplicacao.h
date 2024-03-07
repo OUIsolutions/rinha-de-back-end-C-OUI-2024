@@ -5,7 +5,11 @@
 #define RETORNO_OK 200
 #define MAXIMO_TRANSACOES 10
 
-
+#ifdef  DEBUG
+#define IDENTAR true
+#else
+#define  IDENTAR false
+#endif
 #define MAXIMO_FILA 100000
 #define MAXIMO_REQUEST 2
 #define TIMEOUT_FUNCAO 60

@@ -47,11 +47,12 @@ void cria_clientes_inicias(){
     int total = xpath.size(clientes,"[]");
 
     for(int i = 0; i < total; i++){
-        CxpathJson  * atual = xpath.get_array(clientes,"[%d]",i);
+        CxpathJson  * atual = xpath.get_object(clientes,"[%d]",i);
 
 
         DtwResource * resource_cliente = DtwResource_sub_resource(banco,"%d",i+1);
-        json_parsed =  xpath.dump_to_string(atual,false);
+        json_parsed =  xpath.dump_to_string(atual,IDENTAR);
+
         UniversalGarbage_resset(garbage,json_parsed);
         resource.set_string_in_sub_resource(resource_cliente,json_parsed,CAMINHO_DADOS);
     }
