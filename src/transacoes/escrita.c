@@ -8,7 +8,7 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, Cxp
     xpath.set_int(dados,saldo,"['%s']",SALDO_CHAVE_BANCO);
 
     //criando a transacao
-    CxpathJson  *json_transacao = xpath.newJsonArray();
+    CxpathJson  *json_transacao = xpath.newJsonObject();
     UniversalGarbage_add(garbage, xpath.free,json_transacao);
 
     if(transacao->tipo == CODIGO_CREDITO){

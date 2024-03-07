@@ -13,10 +13,10 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
     CxpathJson  *dados = xpath.new_from_string(dados_str);
     UniversalGarbage_add(garbage, cJSON_Delete,dados);
 
-    int saldo = xpath.get_int(dados,"[%d]",SALDO_INDEX);
-    int limite = xpath.get_int(dados,"[%d]",LIMITE_INDEX);
-    int total_transacoes  = xpath.get_int(dados,"[%d]",TOTAL_TRANSACOES_INDEX);
-    int ultima_transacao =  xpath.get_int(dados,"[%d]",ULTIMA_TRANSACAO_INDEX);
+    int saldo = xpath.get_int(dados,"['%s']",SALDO_CHAVE_BANCO);
+    int limite = xpath.get_int(dados,"['%s']",LIMITE_CHAVE_BANCO);
+    int total_transacoes  = xpath.get_int(dados,"['%s']",TOTAL_TRANSACOES_CHAVE_BANCO);
+    int ultima_transacao =  xpath.get_int(dados,"['%s']",ULTIMA_TRANSACAO_CHAVE_BANCO);
 
 
     CxpathJson  *resposta = xpath.newJsonObject();
@@ -37,20 +37,20 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
     UniversalGarbage_add_simple(garbage,realizada_em);
 
 
-    CxpathJson *array_transacao = NULL;
-    UniversalGarbage_add(garbage, xpath.free,array_transacao);
+    CxpathJson *objeto_transacao = NULL;
+    UniversalGarbage_add(garbage, xpath.free, objeto_transacao);
 
     for(int i =ultima_transacao; i >= (ultima_transacao+1) - total_transacoes; i--){
 
         char * texto_transacao = resource.get_string_from_sub_resource(pasta_transacoes,"%d",i);
 
-        array_transacao = xpath.new_from_string(texto_transacao);
-        UniversalGarbage_resset(garbage,array_transacao);
+        objeto_transacao = xpath.new_from_string(texto_transacao);
+        UniversalGarbage_resset(garbage, objeto_transacao);
 
 
-        int valor = xpath.get_int(array_transacao,"[%d]",VALOR_INDEX);
-        long data = xpath.get_int(array_transacao,"[%d]",DATA_INDEX);
-        char *descricao = xpath.get_str(array_transacao,"[%d]",DESCRICAO_INDEX);
+        int valor = xpath.get_int(objeto_transacao, "['%s']", VALOR_CHAVE_BANCO);
+        long data = xpath.get_int(objeto_transacao, "['%s']", DATA_CHAVE_BANCO);
+        char *descricao = xpath.get_str(objeto_transacao, "[%d]", DESCRICCAO_CHAVE_BANCO);
         realizada_em = convert_inteiro_para_data_em_str(data);
         UniversalGarbage_resset(garbage,realizada_em);
 
