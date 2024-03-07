@@ -12,8 +12,8 @@ Transacao  parseia_transacao(CwebHttpRequest *request){
     CxpathJson *body = xpath.new_from_cJSON_by_reference(cjson_body);
     UniversalGarbage_add(garbage,xpath.free,body);
 
-    char *descricao = xpath.get_str(body,"['%s']",DESCRICAO_CHAVE);
-    int valor_em_int  = xpath.get_int(body,"['%s']",VALOR_CHAVE);
+    criada.descricao= xpath.get_str(body,"['%s']",DESCRICAO_CHAVE);
+    criada.valor  = xpath.get_int(body,"['%s']",VALOR_CHAVE);
     double valor_em_double = xpath.get_double(body,"['%s']",VALOR_CHAVE);
     char *tipo = xpath.get_str(body,"['%s']",TIPO_CHAVE);
 
@@ -36,20 +36,20 @@ Transacao  parseia_transacao(CwebHttpRequest *request){
         return criada;
     }
 
-    int tamanho_descricao = (int)strlen(descricao);
+    int tamanho_descricao = (int)strlen(criada.descricao);
     if(tamanho_descricao == 0 || tamanho_descricao > 10){
         criada.resposta_de_erro= cweb_send_text(DESCRICAO_COM_TAMANHO_INVALIDO, INCONSISTENCIA);
         UniversalGarbage_free(garbage);
         return criada;
     }
-    if(valor_em_int <0){
+    if(criada.valor <0){
         criada.resposta_de_erro =  cweb_send_text(VALOR_PRECISA_SER_INTEIRO, INCONSISTENCIA);
         UniversalGarbage_free(garbage);
         return criada;
     }
 
     //verifica se não foi passado um double
-    if(valor_em_double != (double)valor_em_int){
+    if(valor_em_double != (double)criada.valor){
         criada.resposta_de_erro =  cweb_send_text(VALOR_PRECISA_SER_INTEIRO, INCONSISTENCIA);
         UniversalGarbage_free(garbage);
         return criada;
