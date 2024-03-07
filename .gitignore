@@ -10,6 +10,7 @@ requisicoes
 *.obj
 *.elf
 banco
+main
 # Linker output
 *.ilk
 *.map
