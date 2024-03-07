@@ -7,28 +7,31 @@ void plotar_request_corrente(CwebHttpRequest *request){
 #endif
 
         UniversalGarbage  *garbage = newUniversalGarbage();
-        cJSON  * data = cJSON_CreateObject();
+        CxpathJson  * data = xpath.newJsonObject();
         UniversalGarbage_add(garbage, cJSON_Delete,data);
-        cJSON_AddStringToObject(data,"rota",request->route);
+        xpath.set_str(data,request->route,"['rota']");
+
         if(request->content_length){
             unsigned  char *content = CwebHttpRequest_read_content(request,200);
             if(content){
                 cJSON *parsed = cJSON_Parse((char*)content);
                 if(parsed){
-                    cJSON_AddItemToObject(data,"json_body",parsed);
+                    xpath.set_cjson_getting_ownership(data,parsed,"['json_body']");
                 }
-                else{
-                    cJSON_AddStringToObject(data,"body",(char*)content);
+
+                if(!parsed){
+                    xpath.set_str(data,(char*)content,"['body']");
                 }
             }
         }
-        char *result = cJSON_Print(data);
+        char *result = xpath.dump_to_string(data,true);
         UniversalGarbage_add_simple(garbage,result);
 
-        CTextStack *path = newCTextStack_string_format(
+        CTextStack *path = stack.newStack_string_format(
                 "requisicoes/%d/request.json",
                 cweb_actual_request
                 );
+
         UniversalGarbage_add(garbage, CTextStack_free,path);
     dtw_write_string_file_content(path->rendered_text,result);
     UniversalGarbage_free(garbage);
@@ -40,20 +43,18 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
     return ;
 #endif
     UniversalGarbage  *garbage = newUniversalGarbage();
-    cJSON  * data = cJSON_CreateObject();
+    CxpathJson  * data = xpath.newJsonObject();
     UniversalGarbage_add(garbage, cJSON_Delete,data);
-    cJSON_AddNumberToObject(data,"status",resposta->status_code);
+    xpath.set_int(data,resposta->status_code,"['status']");
+
     if(adiquiriu_a_luz){
-        cJSON *adiquiriu = cJSON_CreateObject();
-        cJSON_AddItemToObject(data,"luz_adiquirida",adiquiriu);
-        cJSON_AddNumberToObject(adiquiriu,"segundos",momento_da_luz_adiquirida.tv_sec);
-        cJSON_AddNumberToObject(adiquiriu,"nanosegundos",momento_da_luz_adiquirida.tv_usec);
+        xpath.set_int(data,momento_da_luz_adiquirida.tv_sec,"['luz','adiquirida','segundos']");
+        xpath.set_int(data,momento_da_luz_adiquirida.tv_usec,"['luz','adiquirida','nanosegundos']");
     }
+
     if(liberou_a_luz){
-        cJSON *liberou = cJSON_CreateObject();
-        cJSON_AddItemToObject(data,"luz_liberada",liberou);
-        cJSON_AddNumberToObject(liberou,"segundos",momento_da_luz_liberada.tv_sec);
-        cJSON_AddNumberToObject(liberou,"nanosegundos",momento_da_luz_liberada.tv_usec);
+        xpath.set_int(data,momento_da_luz_liberada.tv_sec,"['luz','liberada','segundos']");
+        xpath.set_int(data,momento_da_luz_liberada.tv_usec,"['luz','liberada','nanosegundos']");
     }
 
 
@@ -64,14 +65,14 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
             resposta_formatada[resposta->content_length] = '\0';
             cJSON *parsed = cJSON_Parse(resposta_formatada);
             if(parsed){
-                    cJSON_AddItemToObject(data,"json_body",parsed);
+                    xpath.set_cjson_getting_ownership(data,parsed,"['json_body']");
             }
             if(!parsed){
-                cJSON_AddStringToObject(data,"body",resposta_formatada);
+                xpath.set_str(data,resposta_formatada,"['body']");
             }
     }
 
-    char *result = cJSON_Print(data);
+    char *result = xpath.dump_to_string(data,true);
     UniversalGarbage_add_simple(garbage,result);
 
     CTextStack *path = newCTextStack_string_format(
