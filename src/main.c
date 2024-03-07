@@ -70,7 +70,6 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 int main(int argc, char *argv[]){
     cria_namespaces();
     cria_clientes_inicias();
-    return 0;
 
     dtw_remove_any("requisicoes");
     #ifdef DEBUG

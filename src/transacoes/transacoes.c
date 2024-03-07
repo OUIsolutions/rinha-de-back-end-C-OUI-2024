@@ -40,8 +40,8 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao);
 
     cJSON *resposta =cJSON_CreateObject();
-    cJSON_AddNumberToObject(resposta,SALDO,saldo);
-    cJSON_AddNumberToObject(resposta,LIMITE,limite);
+    cJSON_AddNumberToObject(resposta, SALDO_CHAVE, saldo);
+    cJSON_AddNumberToObject(resposta, LIMITE_CHAVE, limite);
     UniversalGarbage_free(garbage);
     return cweb_send_cJSON_cleaning_memory(resposta,RETORNO_OK);
 

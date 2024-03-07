@@ -75,3 +75,10 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
     UniversalGarbage_free(garbage);
 
 }
+
+void marcar_obtencao_da_luz(){
+#ifdef  OBSERVAR
+    adiquiriu_a_luz = true;
+        momento_da_luz_adiquirida = retorna_microsegundos();
+#endif
+}

@@ -5,80 +5,69 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
     UniversalGarbage *garbage = newUniversalGarbage();
     DtwResource_lock(id_cliente);
 
-    #ifdef  OBSERVAR
-        adiquiriu_a_luz = true;
-                momento_da_luz_adiquirida = retorna_microsegundos();
-    #endif
+    marcar_obtencao_da_luz();
 
-    char * dados_str = DtwResource_get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
+    char * dados_str = resource.get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 
-    DtwResource_catch(id_cliente){
-        printf("%s\n", DtwResource_get_error_message(id_cliente));
-    }
 
-    cJSON *dados = cJSON_Parse(dados_str);
+    CxpathJson  *dados = xpath.new_from_string(dados_str);
     UniversalGarbage_add(garbage, cJSON_Delete,dados);
 
-    int saldo = cJSON_GetArrayItem(dados,SALDO_INDEX)->valueint;
-    int limite = cJSON_GetArrayItem(dados,LIMITE_INDEX)->valueint;
-    cJSON *resposta = cJSON_CreateObject();
-    cJSON *responsta_saldo = cJSON_CreateObject();
-    cJSON *ultimas_transacoes = cJSON_CreateArray();
+    int saldo = xpath.get_int(dados,"[%d]",SALDO_INDEX);
+    int limite = xpath.get_int(dados,"[%d]",LIMITE_INDEX);
+    int total_transacoes  = xpath.get_int(dados,"[%d]",TOTAL_TRANSACOES_INDEX);
+    int ultima_transacao =  xpath.get_int(dados,"[%d]",ULTIMA_TRANSACAO_INDEX);
 
-    cJSON_AddItemToObject(resposta,SALDO,responsta_saldo);
-    cJSON_AddItemToObject(resposta,ULTIMAS_TRANSACOES,ultimas_transacoes);
 
-    cJSON_AddNumberToObject(responsta_saldo,TOTAL,saldo);
-    cJSON_AddNumberToObject(responsta_saldo,LIMITE,limite);
+    CxpathJson  *resposta = xpath.newJsonObject();
+    UniversalGarbage_add(garbage,xpath.free,resposta);
+    //marca para xpath que não é para ele limpar o cjson interno
+    resposta->element_reference = true;
 
+    xpath.set_int(resposta, saldo, "['%s','%s']", SALDO_CHAVE, TOTAL_CHAVE);
+    xpath.set_int(resposta, limite, "['%s','%s']", SALDO_CHAVE, LIMITE_CHAVE);
+    
     char *data_do_extrato = convert_inteiro_para_data_em_str(time(NULL));
     UniversalGarbage_add_simple(garbage,data_do_extrato);
-    cJSON_AddStringToObject(responsta_saldo,DATA_EXTRATO,data_do_extrato);
+    xpath.set_str(resposta,data_do_extrato,"['%s','%s']",SALDO_CHAVE,DATA_EXTRATO_CHAVE);
 
 
-    int total_transacoes  = cJSON_GetArrayItem(dados,TOTAL_TRANSACOES_INDEX)->valueint;
-    int ultima_transacao = cJSON_GetArrayItem(dados,ULTIMA_TRANSACAO_INDEX)->valueint;
-
-    DtwResource  *pasta_transacoes = DtwResource_sub_resource(id_cliente,CAMINHO_TRANSACOES);
-
+    DtwResource  *pasta_transacoes = resource.sub_resource(id_cliente,CAMINHO_TRANSACOES);
     char *realizada_em = NULL;
     UniversalGarbage_add_simple(garbage,realizada_em);
 
-    cJSON *array_transacao = NULL;
-    UniversalGarbage_add(garbage, cJSON_Delete,array_transacao);
+
+    CxpathJson *array_transacao = NULL;
+    UniversalGarbage_add(garbage, xpath.free,array_transacao);
+
     for(int i =ultima_transacao; i >= (ultima_transacao+1) - total_transacoes; i--){
 
-        char * texto_transacao = DtwResource_get_string_from_sub_resource(pasta_transacoes,"%d",i);
+        char * texto_transacao = resource.get_string_from_sub_resource(pasta_transacoes,"%d",i);
 
-        array_transacao = cJSON_Parse(texto_transacao);
+        array_transacao = xpath.new_from_string(texto_transacao);
         UniversalGarbage_resset(garbage,array_transacao);
 
-        int valor = cJSON_GetArrayItem(array_transacao,VALOR_INDEX)->valueint;
-        long data = cJSON_GetArrayItem(array_transacao,DATA_INDEX)->valueint;
-        char *descricao = cJSON_GetArrayItem(array_transacao,DESCRICAO_INDEX)->valuestring;
+
+        int valor = xpath.get_int(array_transacao,"[%d]",VALOR_INDEX);
+        long data = xpath.get_int(array_transacao,"[%d]",DATA_INDEX);
+        char *descricao = xpath.get_str(array_transacao,"[%d]",DESCRICAO_INDEX);
         realizada_em = convert_inteiro_para_data_em_str(data);
         UniversalGarbage_resset(garbage,realizada_em);
 
-
-        cJSON  *objeto_transcao = cJSON_CreateObject();
-        cJSON_AddItemToArray(ultimas_transacoes,objeto_transcao);
-
-
         if(valor < 0){
-            cJSON_AddNumberToObject(objeto_transcao,VALOR,valor *-1);
-
-            cJSON_AddStringToObject(objeto_transcao,TIPO, CODIGO_DEBITO_STR);
+            xpath.set_int(resposta,valor * -1, "['%s','$append' ,'%s']", ULTIMAS_TRANSACOES_CHAVE, VALOR_CHAVE);
+            xpath.set_str(resposta,CODIGO_DEBITO_STR,"['%s',-1,'%s']",ULTIMAS_TRANSACOES_CHAVE,TIPO_CHAVE);
         }
 
         if(valor >=0){
-            cJSON_AddNumberToObject(objeto_transcao,VALOR,valor );
-            cJSON_AddStringToObject(objeto_transcao,TIPO, CODIGO_CREDITO_STR);
+            xpath.set_int(resposta,valor, "['%s','$append' ,'%s']", ULTIMAS_TRANSACOES_CHAVE, VALOR_CHAVE);
+            xpath.set_str(resposta,CODIGO_CREDITO_STR,"['%s',-1,'%s']",ULTIMAS_TRANSACOES_CHAVE,TIPO_CHAVE);
         }
-
-        cJSON_AddStringToObject(objeto_transcao,DESCRICAO,descricao);
-        cJSON_AddStringToObject(objeto_transcao,REALIZADA_EM,realizada_em);
+        xpath.set_str(resposta,descricao,"['%s',-1,'%s']",ULTIMAS_TRANSACOES_CHAVE,DESCRICAO_CHAVE);
+        xpath.set_str(resposta,realizada_em,"['%s',-1,'%s']",ULTIMAS_TRANSACOES_CHAVE,REALIZADA_EM_CHAVE);
     }
+    cJSON *resposta_em_cjson = resposta->element;
     UniversalGarbage_free(garbage);
-    return cweb_send_cJSON_cleaning_memory(resposta,RETORNO_OK);
+    return cweb_send_cJSON_cleaning_memory(resposta_em_cjson,RETORNO_OK);
 
 }

@@ -13,7 +13,7 @@ Transacao  parseia_transacao(CwebHttpRequest *request){
         return criada;
     }
     //parseando descricao
-    cJSON *json_descricao = cJSON_GetObjectItem(body,DESCRICAO);
+    cJSON *json_descricao = cJSON_GetObjectItem(body, DESCRICAO_CHAVE);
     if(!json_descricao){
         criada.resposta_de_erro =  cweb_send_text(DESCRICAO_NAO_INFORMADA, INCONSISTENCIA);
         return criada;
@@ -33,7 +33,7 @@ Transacao  parseia_transacao(CwebHttpRequest *request){
     criada.descricao = json_descricao->valuestring;
 
     //parseando valor
-    cJSON *json_valor = cJSON_GetObjectItem(body,VALOR);
+    cJSON *json_valor = cJSON_GetObjectItem(body, VALOR_CHAVE);
 
     if(!json_valor){
         criada.resposta_de_erro =  cweb_send_text(VALOR_NAO_INFORMADO, INCONSISTENCIA);
@@ -54,7 +54,7 @@ Transacao  parseia_transacao(CwebHttpRequest *request){
     }
 
     criada.valor = json_valor->valueint;
-    cJSON *json_tipo = cJSON_GetObjectItem(body,TIPO);
+    cJSON *json_tipo = cJSON_GetObjectItem(body, TIPO_CHAVE);
     if(!json_tipo){
         criada.resposta_de_erro =  cweb_send_text(TIPO_NAO_INFORMADO, INCONSISTENCIA);
         return criada;
