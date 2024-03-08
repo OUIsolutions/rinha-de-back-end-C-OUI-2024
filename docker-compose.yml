@@ -7,7 +7,7 @@ services:
     image: api_c:tag
     hostname: api01
     environment:
-       PROCESSOS: "10"
+       PROCESSOS: "15"
     ports:
       - "3001:3001"
       - "3002:3002"
@@ -16,7 +16,7 @@ services:
       resources:
         limits:
           cpus: "1.0"
-          memory: "400MB"
+          memory: "300MB"
 
 
 
@@ -32,7 +32,7 @@ services:
       resources:
         limits:
           cpus: "0.20"
-          memory: "50MB"
+          memory: "100MB"
 
 
 
