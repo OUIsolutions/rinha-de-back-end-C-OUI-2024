@@ -53,7 +53,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     }
 #endif
     CwebHttpResponse *resposta = roda_servidor(request);
-    plotar_resposta_corrente(resposta);
+    plotar_resposta_corrente(inicio,resposta);
     return  resposta;
 }
 
