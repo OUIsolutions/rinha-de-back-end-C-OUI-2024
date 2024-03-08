@@ -7,7 +7,7 @@ services:
     image: api_c:tag
     hostname: api01
     environment:
-       PROCESSOS: "4"
+       PROCESSOS: "20"
     ports:
       - "3001:3001"
       - "3002:3002"
