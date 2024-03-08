@@ -67,7 +67,7 @@ Essa é estrutura de diretorios enquanto a aplicação esta rodando
 ![Fluxograma Rodando](/arquitetura/fotos/rodando.png)
 
 # Configurando
-em **src/constantes/aplicacao.h", você pode encontrar todas 
+em **src/constantes/aplicacao.h**, você pode encontrar todas 
 as constantes que controlam o app, como total da fila, total de requests 
 simultaneos , etc.
 
