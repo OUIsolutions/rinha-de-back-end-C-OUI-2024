@@ -18,6 +18,6 @@ RUN gcc src/main.c -o a.out
 
 
 # Comando padrão para executar quando o contêiner for iniciado
-CMD ["sh", "-c", "./a.out $(seq 3001 $(expr 3001 + $TOTAL_APIS - 1))"]
+CMD ["sh", "start.sh"]
 
 
