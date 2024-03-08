@@ -3,7 +3,6 @@ FROM ubuntu:latest
 
 # Instale o Git, Python3 e GCC
 RUN apt-get update && \
-    apt-get install -y python3 && \
     apt-get install -y git && \
     apt-get install -y gcc && \
     apt-get clean && \
