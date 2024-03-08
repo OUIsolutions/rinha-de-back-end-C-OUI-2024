@@ -7,7 +7,7 @@ services:
     image: api_c:tag
     hostname: apiend
     environment:
-       PROCESSOS: "30"
+       PROCESSOS: "35"
     ports:
       - "3001:3001"
       - "3002:3002"
