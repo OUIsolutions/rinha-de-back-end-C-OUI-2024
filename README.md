@@ -91,6 +91,8 @@ simultaneos , etc.
 #define TIMEOUT_CLIENTE 60
 ```
 # Testes
+
+![Imagem teste](/fotos_testes/1.png)
 ### Teste de vazamento de memória
 
 Para testar vazamentos de memória, você precisa ter o valgrind instalado na sua máquina,instale com(debian baseds): 
