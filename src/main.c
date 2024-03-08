@@ -29,10 +29,10 @@ int main(int argc, char *argv[]){
 
     // para rodar via docker
     if(getenv(VARIAVEL_PORTA)){
-        sscanf("%d",getenv(VARIAVEL_PORTA),&porta);
+        sscanf(getenv(VARIAVEL_PORTA),"%d",&porta);
     }
     if(getenv(VARIAVEL_TOTAL_PROCESSOS)){
-        sscanf("%d",getenv(VARIAVEL_TOTAL_PROCESSOS),&total_processos);
+        sscanf(getenv(VARIAVEL_TOTAL_PROCESSOS),"%d",&total_processos);
     }
     cria_namespaces();
 
