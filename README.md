@@ -30,23 +30,29 @@ sudo apt install gcc
 ```
 
 
-## Principal 
+### Principal 
 Para rodar em modo principal basta rodar:
 
 ```shel
 gcc src/main.c && ./a.out 
 ```
 
-## Debug 
+### Debug 
 Caso queira rodar em modo debug, basta rodar: 
 ```shel
 gcc src/main.c -DDEBUG && ./a.out 
 ```
 Em modo debug os arquivos dos clientes terão nomes e chaves sem abreviatura, e a aplicação irá rodar em single process
 
-## Teste de memory leaks 
+# Arquitetura 
 
-Para testar memory leaks, você precisa ter o valgrind instalado na sua máquina,instale com(debian baseds): 
+
+
+
+# Testes
+### Teste de vazamento de memória
+
+Para testar vazamentos de memória, você precisa ter o valgrind instalado na sua máquina,instale com(debian baseds): 
 
 ```shel 
 sudo apt-get install valgrind
@@ -55,15 +61,14 @@ e rode com :(para finalizar basta bater em **/end**)
 ```shel 
 gcc src/main.c  -DDEBUG && valgrind ./a.out 
 ```
-
-## Teste de Sanitização 
+### Teste de Sanitização 
 Também é possível testar sanitização de acesso não autorizado de memória com:
 
 ```shel
 gcc src/main.c  -DDEBUG -fsanitize=address && ./a.out
 ```
 
-## Teste de Observabilidade 
+### Teste de Observabilidade 
 
 Também é possível observar as entradas e saidas de todas as requisições, nesse modo toda requisição será salva na pasta **requisicoes** contendo o request, a respostas, e o meta (contendo dados como inicio, fim , e tempo de bloqueamento do cliente)
 
