@@ -12,22 +12,14 @@ services:
 
 
     ports:
-      - "8081:8081"
+      - "3000:3002"
     deploy:
       resources:
         limits:
           cpus: "0.55"
           memory: "200MB"
 
-  api02:
-    <<: *api
-    hostname: api02
-    environment:
 
-        PORTA: "8082"
-        PROCESSOS: "4"
-    ports:
-      - "8082:8082"
   
   nginx:
     image: nginx:latest
