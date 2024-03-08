@@ -18,7 +18,7 @@ COPY . /app
 WORKDIR /app
 
 # Compile o código C
-RUN gcc src/main.c -o a.out
+RUN gcc src/main.c  -DPROCESSO_UNICO -o a.out
 
 # Comando padrão para executar quando o contêiner for iniciado
 CMD ["sh", "start.sh"]
