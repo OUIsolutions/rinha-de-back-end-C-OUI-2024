@@ -14,6 +14,6 @@ typedef struct {
 Transacao  parseia_transacao(CwebHttpRequest *request);
 
 
-CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,DtwResource *id_cliente);
+CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,DtwResource *banco,DtwResource *id_cliente);
 
 void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, CxpathJson *dados, int saldo,Transacao *transacao);

@@ -1,3 +1,3 @@
 
 
-CwebHttpResponse  * gera_extrato(DtwResource *id_cliente);
+CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente);

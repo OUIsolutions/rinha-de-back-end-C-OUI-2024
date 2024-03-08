@@ -6,3 +6,4 @@
 #include "transacoes/transacoes.h"
 #include "extrato/extrato.h"
 #include "observabilidade/observabilidade.h"
+#include "requisicao/requisicao.h"

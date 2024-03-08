@@ -38,7 +38,7 @@ void plotar_request_corrente(CwebHttpRequest *request){
 
 }
 
-void plotar_resposta_corrente(long inicio,CwebHttpResponse *resposta){
+void plotar_resposta_corrente(CwebHttpResponse *resposta){
 #ifndef  OBSERVAR
     return ;
 #endif
@@ -85,21 +85,4 @@ void plotar_resposta_corrente(long inicio,CwebHttpResponse *resposta){
     dtw_write_string_file_content(path->rendered_text,result);
     UniversalGarbage_free(garbage);
 
-}
-
-void marcar_obtencao_da_luz(){
-    adiquiriu_a_luz = true;
-    momento_da_luz_adiquirida = retorna_microsegundos();
-}
-
-void  marcar_liberacao_da_luz(){
-
-#ifndef  OBSERVAR
-    return ;
-#endif
-
-    if(adiquiriu_a_luz){
-        momento_da_luz_liberada = retorna_microsegundos();
-        liberou_a_luz = true;
-    }
 }

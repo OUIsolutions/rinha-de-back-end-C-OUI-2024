@@ -1,10 +1,13 @@
 
 
-CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
+CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
 
     UniversalGarbage *garbage = newUniversalGarbage();
     DtwResource_lock(id_cliente);
-    marcar_obtencao_da_luz();
+    Requisicao  *requisicao_parseada = (Requisicao*)requisicao;
+    requisicao_parseada->adiquiriu_a_luz = true;
+    requisicao_parseada->momento_da_luz_adiquirida =retorna_data_atual();
+
 
     char * dados_str = resource.get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
 

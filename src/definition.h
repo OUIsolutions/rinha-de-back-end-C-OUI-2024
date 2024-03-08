@@ -7,3 +7,4 @@
 #include "transacoes/escrita.c"
 #include "extrato/extrato.c"
 #include "observabilidade/observabilidade.c"
+#include "requisicao/requisicao.c"

@@ -1,5 +1,6 @@
 
-CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,DtwResource *id_cliente){
+CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,DtwResource *banco,DtwResource *id_cliente){
+
 
     Transacao transacao = parseia_transacao(request);
     if(transacao.resposta_de_erro){
@@ -8,7 +9,10 @@ CwebHttpResponse  * gera_transacao(CwebHttpRequest *request,DtwResource *banco,D
     //isso é importante para evitar problemas de concorrência
     UniversalGarbage *garbage = newUniversalGarbage();
     resource.lock(id_cliente);
-    marcar_obtencao_da_luz();
+
+    Requisicao *requisicao_parseada = (Requisicao*)requisicao;
+    requisicao_parseada->adiquiriu_a_luz = true;
+    requisicao_parseada->momento_da_luz_adiquirida = retorna_data_atual();
 
 
     char * dados_str = resource.get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);

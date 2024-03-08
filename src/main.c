@@ -2,47 +2,12 @@
 
 
 #include "dependencias/dependencias.h"
-#include "globais.h"
 #include "declaration.h"
 #include "definition.h"
 
-CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
-    UniversalGarbage  *garbage = newUniversalGarbage();
-    RotaParser rota_obj = parsear_rota(request->route);
-    UniversalGarbage_add_simple(garbage,rota_obj.id_cliente);
-
-    if(rota_obj.invalida){
-        UniversalGarbage_free(garbage);
-        return cweb.response.send_text(ROTA_INVALIDA, INCONSISTENCIA);
-    }
-    DtwResource *banco = resource.newResource(CAMINHO_BANCO);
-
-    UniversalGarbage_add(garbage, DtwResource_free,banco);
-    DtwResource *cliente = resource.sub_resource(banco,rota_obj.id_cliente);
-
-
-    if(DtwResource_type(cliente) == DTW_NOT_FOUND){
-        UniversalGarbage_free(garbage);
-        return cweb.response.send_text(CLIENTE_NAO_EXIST,NAO_ENCONTRADO);
-    }
-    CwebHttpResponse *resposta  = NULL;
-
-    if(rota_obj.acao == ACAO_TRANSACAO){
-        resposta = gera_transacao(request,banco,cliente);
-    }
-    if(rota_obj.acao == ACAO_EXTRATO){
-        resposta = gera_extrato(cliente);
-    }
-
-    UniversalGarbage_free(garbage);
-    marcar_liberacao_da_luz();
-    return resposta;
-
-
-}
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
-    long inicio = time(NULL);
+    struct  timeval inicio = retorna_data_atual();
     plotar_request_corrente(request);
 
 #ifdef DEBUG
