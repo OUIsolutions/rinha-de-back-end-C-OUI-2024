@@ -8,7 +8,7 @@
 
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
     struct  timeval inicio = retorna_data_atual();
-    plotar_request_corrente(request);
+    plotar_request_corrente(inicio,request);
 
 #ifdef DEBUG
     //rota para avaliar se gerou algum tipo de memory leah
@@ -17,9 +17,10 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
         return cweb_send_text("aplicação terminada",200);
     }
 #endif
-    CwebHttpResponse *resposta = roda_servidor(request);
-    plotar_resposta_corrente(inicio,resposta);
-    return  resposta;
+    Requisicao resposta = roda_servidor(request);
+    plotar_resposta_corrente(resposta.resposta);
+    plotar_meta_dados_corrente(inicio,&resposta);
+    return  resposta.resposta;
 }
 
 int main(int argc, char *argv[]){

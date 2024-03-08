@@ -1,6 +1,13 @@
 
 
-void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, CxpathJson *dados, int saldo,Transacao *transacao){
+void escreve_transacao_no_disco(
+        DtwResource *banco,
+        DtwResource *id_cliente,
+        CxpathJson *dados,
+        int saldo,
+        Transacao *transacao
+        
+        ){
 
     UniversalGarbage  *garbage = newUniversalGarbage();
 

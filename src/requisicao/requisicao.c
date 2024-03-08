@@ -30,7 +30,7 @@ Requisicao roda_servidor(CwebHttpRequest *request){
     }
 
     if(rota_obj.acao == ACAO_EXTRATO){
-        req.resposta = gera_extrato(cliente);
+        req.resposta = gera_extrato(&req,cliente);
     }
     if(req.adiquiriu_a_luz){
         req.momento_da_luz_liberada = retorna_data_atual();

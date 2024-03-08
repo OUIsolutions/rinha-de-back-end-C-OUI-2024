@@ -1,6 +1,6 @@
 
 
-void plotar_request_corrente(CwebHttpRequest *request){
+void plotar_request_corrente(struct timeval inicio,CwebHttpRequest *request){
 
 #ifndef  OBSERVAR
     return ;
@@ -10,6 +10,8 @@ void plotar_request_corrente(CwebHttpRequest *request){
         CxpathJson  * data = xpath.newJsonObject();
         UniversalGarbage_add(garbage, cJSON_Delete,data);
         xpath.set_str(data,request->route,"['rota']");
+        xpath.set_int(data,inicio.tv_sec,"['inicio','segundos']");
+        xpath.set_int(data,inicio.tv_usec,"['inicio','nanosegundos']");
 
         if(request->content_length){
             unsigned  char *content = CwebHttpRequest_read_content(request,200);
@@ -37,7 +39,45 @@ void plotar_request_corrente(CwebHttpRequest *request){
     UniversalGarbage_free(garbage);
 
 }
+void plotar_meta_dados_corrente(struct  timeval inicio,void *requisicao){
+#ifndef  OBSERVAR
+    return ;
+#endif
+    Requisicao  *req = (Requisicao*)requisicao;
+    UniversalGarbage  *garbage = newUniversalGarbage();
+    CxpathJson  * data = xpath.newJsonObject();
+    UniversalGarbage_add(garbage, cJSON_Delete,data);
 
+    xpath.set_int(data,inicio.tv_sec,"['inicio','segundos']");
+    xpath.set_int(data,inicio.tv_usec,"['inicio','nanosegundos']");
+
+    struct timeval fim = retorna_data_atual();
+    xpath.set_int(data,fim.tv_sec,"['fim','segundos']");
+    xpath.set_int(data,fim.tv_usec,"['fim','nanosegundos']");
+
+    if(req->adiquiriu_a_luz){
+        xpath.set_int(data,req->momento_da_luz_adiquirida.tv_sec,"['luz','adiquirida','segundos']");
+        xpath.set_int(data,req->momento_da_luz_adiquirida.tv_usec,"['luz','adiquirida','nanosegundos']");
+    }
+
+    if(req->liberou_a_luz){
+        xpath.set_int(data,req->momento_da_luz_liberada.tv_sec,"['luz','liberada','segundos']");
+        xpath.set_int(data,req->momento_da_luz_liberada.tv_usec,"['luz','liberada','nanosegundos']");
+    }
+
+    char *result = xpath.dump_to_string(data,true);
+    UniversalGarbage_add_simple(garbage,result);
+
+    CTextStack *path = newCTextStack_string_format(
+            "requisicoes/%d/meta.json",
+            cweb_actual_request
+    );
+    UniversalGarbage_add(garbage, CTextStack_free,path);
+    dtw_write_string_file_content(path->rendered_text,result);
+    UniversalGarbage_free(garbage);
+
+
+}
 void plotar_resposta_corrente(CwebHttpResponse *resposta){
 #ifndef  OBSERVAR
     return ;
@@ -46,18 +86,7 @@ void plotar_resposta_corrente(CwebHttpResponse *resposta){
     CxpathJson  * data = xpath.newJsonObject();
     UniversalGarbage_add(garbage, cJSON_Delete,data);
     xpath.set_int(data,resposta->status_code,"['status']");
-    xpath.set_int(data,inicio,"['inicio']");
-    xpath.set_int(data, time(NULL),"['fim']");
 
-    if(adiquiriu_a_luz){
-        xpath.set_int(data,momento_da_luz_adiquirida.tv_sec,"['luz','adiquirida','segundos']");
-        xpath.set_int(data,momento_da_luz_adiquirida.tv_usec,"['luz','adiquirida','nanosegundos']");
-    }
-
-    if(liberou_a_luz){
-        xpath.set_int(data,momento_da_luz_liberada.tv_sec,"['luz','liberada','segundos']");
-        xpath.set_int(data,momento_da_luz_liberada.tv_usec,"['luz','liberada','nanosegundos']");
-    }
 
 
     if(resposta->content_length){
