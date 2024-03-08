@@ -1,0 +1,2 @@
+docker run -e PORTA=5002 -p 5002:5002  -d a
+pi_c3:tag      
