@@ -2,10 +2,11 @@ version: "1.0"
 
 services:
   api01: &api
-    image: teste
+    image: api_c:tag
     hostname: api01
     environment:
-      - PORT=3000
+      - PORTA=3001
+      - PROCESSOS=4
     ports:
       - "3001:3000"
     deploy:
@@ -17,6 +18,8 @@ services:
   api02:
     <<: *api
     hostname: api02
+    environment:
+      - PORTA=3002
     ports:
       - "3002:3000"
   
