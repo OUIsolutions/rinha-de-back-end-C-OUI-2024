@@ -2,4 +2,5 @@ docker run -p 3001:3001 -p 3002:3002 -p 3003:3003    -d api_c:tag
  
 docker build  --no-cache -t api_c:tag .
 
+docker exec -it  8619 /bin/sh
 docker-compose up -d

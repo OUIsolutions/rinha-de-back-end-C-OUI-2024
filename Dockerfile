@@ -8,14 +8,17 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Clone o repositório
-RUN git clone https://github.com/OUIsolutions/rinha-de-back-end-C-OUI-2024
+# Crie um diretório para o aplicativo dentro do contêiner
+RUN mkdir /app
+
+# Copie o conteúdo do repositório local para o contêiner
+COPY . /app
 
 # Configure o diretório de trabalho
-WORKDIR /rinha-de-back-end-C-OUI-2024
+WORKDIR /app
 
 # Compile o código C
 RUN gcc src/main.c -o a.out
 
 # Comando padrão para executar quando o contêiner for iniciado
-CMD ["sh","start.sh"]
+CMD ["sh", "start.sh"]
