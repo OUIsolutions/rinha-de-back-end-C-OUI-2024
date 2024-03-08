@@ -38,7 +38,7 @@ void plotar_request_corrente(CwebHttpRequest *request){
 
 }
 
-void plotar_resposta_corrente(int inicio,CwebHttpResponse *resposta){
+void plotar_resposta_corrente(long inicio,CwebHttpResponse *resposta){
 #ifndef  OBSERVAR
     return ;
 #endif
@@ -88,11 +88,6 @@ void plotar_resposta_corrente(int inicio,CwebHttpResponse *resposta){
 }
 
 void marcar_obtencao_da_luz(){
-
-
-#ifndef  OBSERVAR
-    return ;
-#endif
     adiquiriu_a_luz = true;
     momento_da_luz_adiquirida = retorna_microsegundos();
 }

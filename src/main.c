@@ -42,7 +42,7 @@ CwebHttpResponse *roda_servidor(CwebHttpRequest *request ) {
 
 }
 CwebHttpResponse *main_sever(CwebHttpRequest *request ){
-    int inicio = time(NULL);
+    long inicio = time(NULL);
     plotar_request_corrente(request);
 
 #ifdef DEBUG
@@ -58,7 +58,12 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 }
 
 int main(int argc, char *argv[]){
+
+
+
     cria_namespaces();
+
+
     cria_clientes_inicias();
 
     dtw_remove_any("requisicoes");

@@ -19,7 +19,8 @@ void escreve_transacao_no_disco(DtwResource *banco, DtwResource *id_cliente, Cxp
         xpath.set_int(json_transacao,transacao->valor* -1,"['%s']",VALOR_CHAVE_BANCO);
     }
 
-    xpath.set_int(json_transacao, time(NULL),"['%s']",DATA_CHAVE_BANCO);
+    xpath.set_int(json_transacao,momento_da_luz_adiquirida.tv_sec,"['%s']",DATA_SEGUNDOS_CHAVE);
+    xpath.set_int(json_transacao,momento_da_luz_adiquirida.tv_usec,"['%s']",DATA_NANO_SEGUNDOS_CHAVE);
     xpath.set_str(json_transacao,transacao->descricao,"['%s']",DESCRICCAO_CHAVE_BANCO);
 
     int id_transacao = 0;

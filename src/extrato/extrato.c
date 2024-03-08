@@ -4,7 +4,6 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
     UniversalGarbage *garbage = newUniversalGarbage();
     DtwResource_lock(id_cliente);
-
     marcar_obtencao_da_luz();
 
     char * dados_str = resource.get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
@@ -26,8 +25,10 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
     xpath.set_int(resposta, saldo, "['%s','%s']", SALDO_CHAVE, TOTAL_CHAVE);
     xpath.set_int(resposta, limite, "['%s','%s']", SALDO_CHAVE, LIMITE_CHAVE);
-    
-    char *data_do_extrato = convert_inteiro_para_data_em_str(time(NULL));
+
+    //isso é importante, já que o que vale não é  o momento da requisicao
+    // mas sim o momento que adiquirimos o bloqueio do cliente
+    char *data_do_extrato = convert_inteiro_para_data_em_str(momento_da_luz_adiquirida.tv_sec,momento_da_luz_adiquirida.tv_usec);
     UniversalGarbage_add_simple(garbage,data_do_extrato);
     xpath.set_str(resposta,data_do_extrato,"['%s','%s']",SALDO_CHAVE,DATA_EXTRATO_CHAVE);
 
@@ -49,9 +50,10 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
 
 
         int valor = xpath.get_int(objeto_transacao, "['%s']", VALOR_CHAVE_BANCO);
-        long data = xpath.get_int(objeto_transacao, "['%s']", DATA_CHAVE_BANCO);
+        long segundos = xpath.get_int(objeto_transacao, "['%s']", DATA_SEGUNDOS_CHAVE);
+        long nano_segundos = xpath.get_int(objeto_transacao,"['%s']",DATA_NANO_SEGUNDOS_CHAVE);
         char *descricao = xpath.get_str(objeto_transacao, "[%d]", DESCRICCAO_CHAVE_BANCO);
-        realizada_em = convert_inteiro_para_data_em_str(data);
+        realizada_em = convert_inteiro_para_data_em_str(segundos,nano_segundos);
         UniversalGarbage_resset(garbage,realizada_em);
 
         if(valor < 0){
