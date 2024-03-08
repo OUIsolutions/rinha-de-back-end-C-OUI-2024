@@ -8,7 +8,7 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
     }
     //isso é importante para evitar problemas de concorrência
     UniversalGarbage *garbage = newUniversalGarbage();
-    resource.lock(id_cliente);
+    while(resource.lock(id_cliente));
 
     Requisicao *requisicao_parseada = (Requisicao*)requisicao;
     requisicao_parseada->adiquiriu_a_luz = true;

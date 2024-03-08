@@ -3,7 +3,7 @@
 CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
 
     UniversalGarbage *garbage = newUniversalGarbage();
-    DtwResource_lock(id_cliente);
+    while(resource.lock(id_cliente));
     Requisicao  *requisicao_parseada = (Requisicao*)requisicao;
     requisicao_parseada->adiquiriu_a_luz = true;
     requisicao_parseada->momento_da_luz_adiquirida =retorna_data_atual();
