@@ -28,9 +28,10 @@ int main(int argc, char *argv[]){
     int total_processos = MAXIMO_REQUEST;
 
     // para rodar via docker
-    if(getenv(VARIAVEL_PORTA)){
-        sscanf(getenv(VARIAVEL_PORTA),"%d",&porta);
+    if(argc >= 2){
+        sscanf(argv[1],"%d",&porta);
     }
+
     if(getenv(VARIAVEL_TOTAL_PROCESSOS)){
         sscanf(getenv(VARIAVEL_TOTAL_PROCESSOS),"%d",&total_processos);
     }

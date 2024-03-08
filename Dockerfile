@@ -17,6 +17,7 @@ WORKDIR /rinha-de-back-end-C-OUI-2024
 RUN gcc src/main.c -o a.out
 
 
-
 # Comando padrão para executar quando o contêiner for iniciado
-CMD ["./a.out"]
+CMD ["./a.out 3001"]
+CMD ["./a.out 3002"]
+
