@@ -7,20 +7,17 @@ services:
     image: api_c:tag
     hostname: api01
     environment:
-       PORTA: "8081"
        PROCESSOS: "4"
-
-
     ports:
       - "3000:3002"
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "200MB"
+          cpus: "0.90"
+          memory: "400MB"
 
 
-  
+
   nginx:
     image: nginx:latest
     volumes:
