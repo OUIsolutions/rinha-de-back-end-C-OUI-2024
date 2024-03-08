@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net" modified="2024-03-08T07:17:38.015Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="fmfm5Fc0Jm3FJwHqif3w" version="24.0.2" type="device">
+  <diagram name="Página-1" id="ZX2QT6RXLqiIbvjbgT1J">
+    <mxGraphModel dx="636" dy="310" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="20" y="145" width="3110" height="1655" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-6" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="870" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-4" value="&lt;font style=&quot;font-size: 31px;&quot;&gt;Cliente 1&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="690" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-7" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;dados.json&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="385" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-9" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;transacoes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="620" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-10" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;limite&quot;:&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;100000&lt;/span&gt;&lt;span style=&quot;background-color: initial; white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;saldo&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;total_transacoes&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;ultima_transacao&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="1">
+          <mxGeometry x="127.5" y="240" width="182.5" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-11" value="pasta vazia" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="230" width="470" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-16" value="&lt;font style=&quot;font-size: 47px;&quot;&gt;Banco&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1510" y="1710" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-18" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="170" width="870" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-19" value="&lt;font style=&quot;font-size: 31px;&quot;&gt;Cliente 2&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="690" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-20" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;transacoes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1610" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-21" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&quot;limite&quot;:&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;80000,&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;saldo&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;total_transacoes&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;ultima_transacao&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="1">
+          <mxGeometry x="1117.5" y="240" width="182.5" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-22" value="pasta vazia" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="230" width="470" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-23" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="2090" y="180" width="870" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-24" value="&lt;font style=&quot;font-size: 31px;&quot;&gt;Cliente 3&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2480" y="700" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-25" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;transacoes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2630" y="590" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-26" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;limite&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;,&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;1000000&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial; white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&quot;saldo&quot;:&lt;/span&gt;&lt;span style=&quot;background-color: initial; white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;total_transacoes&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;ultima_transacao&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="1">
+          <mxGeometry x="2137.5" y="250" width="182.5" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-27" value="pasta vazia" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2420" y="240" width="470" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-28" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="970" width="870" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-29" value="&lt;font style=&quot;font-size: 31px;&quot;&gt;Cliente 4&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="460" y="1490" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-30" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;transacoes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-31" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&quot;limite&quot;:&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;10000000,&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;saldo&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;total_transacoes&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;ultima_transacao&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="1">
+          <mxGeometry x="117.5" y="1040" width="182.5" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-32" value="pasta vazia" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1030" width="470" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-38" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="980" width="870" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-39" value="&lt;font style=&quot;font-size: 31px;&quot;&gt;Cliente 5&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="1500" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-40" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;transacoes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1610" y="1390" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-41" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&quot;limite&quot;:&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;500000,&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;saldo&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;total_transacoes&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;&quot;ultima_transacao&quot;:&lt;span style=&quot;white-space:pre&quot;&gt;&#x9;&lt;/span&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="1049" width="182.5" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="wLsm8MtVs2G6hdcl1hEw-42" value="pasta vazia" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="1040" width="470" height="340" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

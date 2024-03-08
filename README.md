@@ -47,9 +47,18 @@ Em modo debug os arquivos dos clientes terão nomes e chaves sem abreviatura, e 
 # Arquitetura 
 
 Esse é o modelo arquitetural simples de funcionamento da aplicação
+baseado em armazenamento de arquivos 
+Esse modelo arquitetural esta sendo baseado no modo debug de execução
+já que em modo prod os nomes são todos abreviados
 
 ![Fluxograma](/arquitetura/fotos/fluxo.png)
 
+# Estrutura de diretorio Inicial
+
+Essa é a estrutura de diretorio inicial , que é criada na **main** 
+antes da aplicação iniciar 
+
+![Fluxograma](/arquitetura/fotos/armazenamento_inicial.png)
 
 
 # Testes
