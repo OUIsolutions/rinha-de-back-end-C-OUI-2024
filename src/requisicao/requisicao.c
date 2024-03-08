@@ -33,6 +33,7 @@ Requisicao roda_servidor(CwebHttpRequest *request){
         req.resposta = gera_extrato(&req,cliente);
     }
     if(req.adiquiriu_a_luz){
+        req.liberou_a_luz = true;
         req.momento_da_luz_liberada = retorna_data_atual();
     }
     UniversalGarbage_free(garbage);
