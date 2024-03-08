@@ -3,8 +3,8 @@
 #ifdef DEBUG
 
     #define CAMINHO_BANCO "banco"
-    #define  CAMINHO_DADOS "dados"
-#define CAMINHO_TRANSACOES "transacoes"
+    #define  CAMINHO_DADOS "dados.json"
+#define CAMINHO_TRANSACOES "transacoes.json"
 #else
 
 #define CAMINHO_BANCO "b"
