@@ -88,5 +88,3 @@ Usada para o Processamento de strings
 
 [Repositório](https://github.com/OUIsolutions/CTextEngine)
 
-
-
