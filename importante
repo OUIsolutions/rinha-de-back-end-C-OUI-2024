@@ -2,3 +2,5 @@ docker run -p 3000:3002  -d a
 pi_c3:tag      
 
 docker build  --no-cache -t api_c:tag .
+
+docker-compose up -d

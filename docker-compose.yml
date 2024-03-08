@@ -14,7 +14,7 @@ services:
       resources:
         limits:
           cpus: "1.0"
-          memory: "400MB"
+          memory: "380MB"
 
 
 
@@ -24,14 +24,13 @@ services:
       - ./ngnix.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - api01
-      - api02
     ports:
       - "9999:9999"
     deploy:
       resources:
         limits:
           cpus: "0.20"
-          memory: "10MB"
+          memory: "20MB"
 
 
 
