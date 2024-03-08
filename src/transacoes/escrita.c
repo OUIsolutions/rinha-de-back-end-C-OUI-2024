@@ -5,9 +5,9 @@ void escreve_transacao_no_disco(
         DtwResource *id_cliente,
         CxpathJson *dados,
         int saldo,
-        Transacao *transacao
-        
-        ){
+        Transacao *transacao,
+        struct  timeval  momento_da_luz_adiquirida
+){
 
     UniversalGarbage  *garbage = newUniversalGarbage();
 

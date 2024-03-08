@@ -31,7 +31,10 @@ CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
 
     //isso é importante, já que o que vale não é  o momento da requisicao
     // mas sim o momento que adiquirimos o bloqueio do cliente
-    char *data_do_extrato = convert_inteiro_para_data_em_str(momento_da_luz_adiquirida.tv_sec,momento_da_luz_adiquirida.tv_usec);
+    char *data_do_extrato = convert_inteiro_para_data_em_str(
+            requisicao_parseada->momento_da_luz_adiquirida.tv_sec,
+            requisicao_parseada->momento_da_luz_adiquirida.tv_usec
+            );
     UniversalGarbage_add_simple(garbage,data_do_extrato);
     xpath.set_str(resposta,data_do_extrato,"['%s','%s']",SALDO_CHAVE,DATA_EXTRATO_CHAVE);
 

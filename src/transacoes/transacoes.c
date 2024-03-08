@@ -37,7 +37,7 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
         UniversalGarbage_free(garbage);
         return cweb_send_text(LIMITE_INDISPONIVEL,INCONSISTENCIA);
     }
-    escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao);
+    escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao,requisicao_parseada->momento_da_luz_adiquirida);
 
     CxpathJson  *resposta =xpath.newJsonObject();
     UniversalGarbage_add(garbage,xpath.free,resposta);
