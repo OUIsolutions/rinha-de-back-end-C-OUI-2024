@@ -46,6 +46,9 @@ Em modo debug os arquivos dos clientes terão nomes e chaves sem abreviatura, e 
 
 # Arquitetura 
 
+Esse é o modelo arquitetural simples de funcionamento da aplicação
+
+![Fluxograma](/arquitetura/fotos/fluxo.png)
 
 
 
