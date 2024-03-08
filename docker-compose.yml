@@ -5,10 +5,10 @@ services:
     image: api_c:tag
     hostname: api01
     environment:
-      - PORTA=3001
-      - PROCESSOS=4
+       PORTA: "8081"
+       PROCESSOS: "4"
     ports:
-      - "3001:3000"
+      - "8081:8081"
     deploy:
       resources:
         limits:
@@ -19,9 +19,11 @@ services:
     <<: *api
     hostname: api02
     environment:
-      - PORTA=3002
+
+        PORTA: "8082"
+        PROCESSOS: "4"
     ports:
-      - "3002:3000"
+      - "8082:8082"
   
   nginx:
     image: nginx:latest
