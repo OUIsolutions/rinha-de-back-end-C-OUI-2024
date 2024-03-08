@@ -7,7 +7,6 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
         return transacao.resposta_de_erro;
     }
     //isso é importante para evitar problemas de concorrência
-    UniversalGarbage *garbage = newUniversalGarbage();
     int inicio = time(NULL);
     while(resource.lock(id_cliente)){
         int agora = time(NULL);
@@ -23,7 +22,8 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
         //significa que deu merda e o cliente vai aborta
         return cweb_send_text("",ERRO_INTERNO);
     }
-    
+    UniversalGarbage *garbage = newUniversalGarbage();
+
     Requisicao *requisicao_parseada = (Requisicao*)requisicao;
     requisicao_parseada->adiquiriu_o_bloqueio = true;
     requisicao_parseada->momento_do_bloqueio_adiquirido = retorna_data_atual();

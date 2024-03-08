@@ -2,7 +2,6 @@
 
 CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
 
-    UniversalGarbage *garbage = newUniversalGarbage();
 
     int inicio = time(NULL);
     while(resource.lock(id_cliente)){
@@ -19,6 +18,8 @@ CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
         //significa que deu merda e o cliente vai aborta
         return cweb_send_text("",ERRO_INTERNO);
     }
+
+    UniversalGarbage *garbage = newUniversalGarbage();
     Requisicao  *requisicao_parseada = (Requisicao*)requisicao;
     requisicao_parseada->adiquiriu_o_bloqueio = true;
     requisicao_parseada->momento_do_bloqueio_adiquirido =retorna_data_atual();
