@@ -55,14 +55,14 @@ void plotar_meta_dados_corrente(struct  timeval inicio,void *requisicao){
     xpath.set_int(data,fim.tv_sec,"['fim','segundos']");
     xpath.set_int(data,fim.tv_usec,"['fim','nanosegundos']");
 
-    if(req->adiquiriu_a_luz){
-        xpath.set_int(data,req->momento_da_luz_adiquirida.tv_sec,"['luz','adiquirida','segundos']");
-        xpath.set_int(data,req->momento_da_luz_adiquirida.tv_usec,"['luz','adiquirida','nanosegundos']");
+    if(req->adiquiriu_o_bloqueio){
+        xpath.set_int(data, req->momento_do_bloqueio_adiquirido.tv_sec, "['bloqueio','adiquirida','segundos']");
+        xpath.set_int(data, req->momento_do_bloqueio_adiquirido.tv_usec, "['bloqueio','adiquirida','nanosegundos']");
     }
 
-    if(req->liberou_a_luz){
-        xpath.set_int(data,req->momento_da_luz_liberada.tv_sec,"['luz','liberada','segundos']");
-        xpath.set_int(data,req->momento_da_luz_liberada.tv_usec,"['luz','liberada','nanosegundos']");
+    if(req->liberou_o_bloqueio){
+        xpath.set_int(data, req->momento_do_bloqueio_liberado.tv_sec, "['bloqueio','liberada','segundos']");
+        xpath.set_int(data, req->momento_do_bloqueio_liberado.tv_usec, "['bloqueio','liberada','nanosegundos']");
     }
 
     char *result = xpath.dump_to_string(data,true);

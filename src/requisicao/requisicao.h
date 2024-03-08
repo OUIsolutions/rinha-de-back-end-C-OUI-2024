@@ -3,10 +3,10 @@
 typedef struct {
 
     CwebHttpResponse *resposta;
-    bool adiquiriu_a_luz;
-    bool liberou_a_luz;
-    struct timeval momento_da_luz_adiquirida;
-    struct timeval momento_da_luz_liberada;
+    bool adiquiriu_o_bloqueio;
+    bool liberou_o_bloqueio;
+    struct timeval momento_do_bloqueio_adiquirido;
+    struct timeval momento_do_bloqueio_liberado;
 
 }Requisicao;
 

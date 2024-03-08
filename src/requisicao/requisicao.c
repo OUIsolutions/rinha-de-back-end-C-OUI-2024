@@ -32,9 +32,9 @@ Requisicao roda_servidor(CwebHttpRequest *request){
     if(rota_obj.acao == ACAO_EXTRATO){
         req.resposta = gera_extrato(&req,cliente);
     }
-    if(req.adiquiriu_a_luz){
-        req.liberou_a_luz = true;
-        req.momento_da_luz_liberada = retorna_data_atual();
+    if(req.adiquiriu_o_bloqueio){
+        req.liberou_o_bloqueio = true;
+        req.momento_do_bloqueio_liberado = retorna_data_atual();
     }
     UniversalGarbage_free(garbage);
 

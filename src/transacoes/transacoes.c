@@ -11,8 +11,8 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
     while(resource.lock(id_cliente));
 
     Requisicao *requisicao_parseada = (Requisicao*)requisicao;
-    requisicao_parseada->adiquiriu_a_luz = true;
-    requisicao_parseada->momento_da_luz_adiquirida = retorna_data_atual();
+    requisicao_parseada->adiquiriu_o_bloqueio = true;
+    requisicao_parseada->momento_do_bloqueio_adiquirido = retorna_data_atual();
 
 
     char * dados_str = resource.get_string_from_sub_resource(id_cliente,CAMINHO_DADOS);
@@ -37,7 +37,7 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
         UniversalGarbage_free(garbage);
         return cweb_send_text(LIMITE_INDISPONIVEL,INCONSISTENCIA);
     }
-    escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao,requisicao_parseada->momento_da_luz_adiquirida);
+    escreve_transacao_no_disco(banco, id_cliente, dados, saldo, &transacao,requisicao_parseada->momento_do_bloqueio_adiquirido);
 
     CxpathJson  *resposta =xpath.newJsonObject();
     UniversalGarbage_add(garbage,xpath.free,resposta);
