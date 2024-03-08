@@ -52,7 +52,7 @@ CwebHttpResponse  * gera_extrato(DtwResource *id_cliente){
         int valor = xpath.get_int(objeto_transacao, "['%s']", VALOR_CHAVE_BANCO);
         long segundos = xpath.get_int(objeto_transacao, "['%s']", DATA_SEGUNDOS_CHAVE);
         long nano_segundos = xpath.get_int(objeto_transacao,"['%s']",DATA_NANO_SEGUNDOS_CHAVE);
-        char *descricao = xpath.get_str(objeto_transacao, "[%d]", DESCRICCAO_CHAVE_BANCO);
+        char *descricao = xpath.get_str(objeto_transacao, "['%s']", DESCRICCAO_CHAVE_BANCO);
         realizada_em = convert_inteiro_para_data_em_str(segundos,nano_segundos);
         UniversalGarbage_resset(garbage,realizada_em);
 
