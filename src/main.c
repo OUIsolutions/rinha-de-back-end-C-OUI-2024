@@ -24,11 +24,21 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 }
 
 int main(int argc, char *argv[]){
+    int porta = PORTA_PADRAO;
+    int total_processos = MAXIMO_REQUEST;
 
-
-
+    // para rodar via docker
+    if(getenv(VARIAVEL_PORTA)){
+        sscanf("%d",getenv(VARIAVEL_PORTA),&porta);
+    }
+    if(getenv(VARIAVEL_TOTAL_PROCESSOS)){
+        sscanf("%d",getenv(VARIAVEL_TOTAL_PROCESSOS),&total_processos);
+    }
     cria_namespaces();
 
+    printf("porta escolhida: %d\n",porta);
+    printf("total de proessos:%d\n",total_processos);
+    printf("Alea jacta est\n");
 
     cria_clientes_inicias();
 
@@ -44,9 +54,9 @@ int main(int argc, char *argv[]){
 
         }
     #else
-            CwebServer server = newCwebSever(PORTA_PADRAO, main_sever);
+            CwebServer server = newCwebSever(porta, main_sever);
             server.max_queue = MAXIMO_FILA;
-            server.max_requests =  MAXIMO_REQUEST;
+            server.max_requests =  total_processos;
             server.function_timeout = TIMEOUT_FUNCAO;
             server.client_timeout = TIMEOUT_CLIENTE;
              CwebServer_start(&server);

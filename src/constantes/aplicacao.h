@@ -14,3 +14,6 @@
 #define MAXIMO_REQUEST 5
 #define TIMEOUT_FUNCAO 60
 #define TIMEOUT_CLIENTE 60
+
+#define VARIAVEL_PORTA "porta"
+#define VARIAVEL_TOTAL_PROCESSOS "processos"
