@@ -1,4 +1,4 @@
-version: "3.5"
+version: "1.0"
 
 services:
   api01: &api
@@ -34,6 +34,8 @@ services:
         limits:
           cpus: "0.15"
           memory: "10MB"
+
+
 
 networks:
   default:
