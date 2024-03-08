@@ -21,4 +21,4 @@ EXPOSE 3000
 EXPOSE 3001
 EXPOSE 3002
 # Comando padrão para executar quando o contêiner for iniciado
-CMD ["./a.out"]
+#CMD ["./a.out"]
