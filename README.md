@@ -51,14 +51,20 @@ baseado em armazenamento de arquivos
 Esse modelo arquitetural esta sendo baseado no modo debug de execução
 já que em modo prod os nomes são todos abreviados
 
-![Fluxograma](/arquitetura/fotos/fluxo.png)
+![Fluxograma Arquitetural](/arquitetura/fotos/fluxo.png)
 
 # Estrutura de diretorio Inicial
 
 Essa é a estrutura de diretorio inicial , que é criada na **main** 
 antes da aplicação iniciar 
 
-![Fluxograma](/arquitetura/fotos/armazenamento_inicial.png)
+![Fluxograma Armazenamento inicial](/arquitetura/fotos/armazenamento_inicial.png)
+
+# Estrutura de diretorios Rodando
+
+Essa é estrutura de diretorios enquanto a aplicação esta rodando
+
+![Fluxograma Rodando](/arquitetura/fotos/rodando.png)
 
 
 # Testes
