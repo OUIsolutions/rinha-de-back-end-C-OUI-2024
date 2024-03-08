@@ -16,9 +16,6 @@ WORKDIR /rinha-de-back-end-C-OUI-2024
 # Compile o código C
 RUN gcc src/main.c -o a.out
 
-# Exponha a porta 3000 (se necessário)
-EXPOSE 3000
-EXPOSE 3001
-EXPOSE 3002
+
 # Comando padrão para executar quando o contêiner for iniciado
 CMD ["./a.out"]
