@@ -1,10 +1,11 @@
 # Use a imagem base do Ubuntu
 FROM ubuntu:latest
 
-# Instale o Git
+# Instale o Git, Python3 e GCC
 RUN apt-get update && \
-    apt-get-install python3 &&\
-    apt-get install -y git &&apt-get install -y gcc  && \
+    apt-get install -y python3 && \
+    apt-get install -y git && \
+    apt-get install -y gcc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -17,8 +18,5 @@ WORKDIR /rinha-de-back-end-C-OUI-2024
 # Compile o código C
 RUN gcc src/main.c -o a.out
 
-
 # Comando padrão para executar quando o contêiner for iniciado
-CMD ["python3", "start.py"]
-
-
+CMD ["sh","start.sh"]
