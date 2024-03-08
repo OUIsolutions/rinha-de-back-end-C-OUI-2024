@@ -7,9 +7,6 @@ services:
     image: api_c:tag
     hostname: api01
     environment:
-      ##isso vai criar 3 apis , com capacidade mmáxima de 20 processos em 
-      #cada api.
-       TOTAL_APIS: 3 
        PROCESSOS: "20"
     ports:
       - "3001:3001"
