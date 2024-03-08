@@ -7,11 +7,11 @@ services:
     image: api_c:tag
     hostname: api01
     environment:
-       PROCESSOS: "15"
+       PROCESSOS: "30"
     ports:
       - "3001:3001"
       - "3002:3002"
-      - "3003:3003"
+  #      - "3003:3003"
     deploy:
       resources:
         limits:
