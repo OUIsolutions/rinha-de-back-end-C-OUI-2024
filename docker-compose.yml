@@ -3,11 +3,11 @@ version: "1.0"
 
 
 services:
-  api01: &api
+  apiend: &api
     image: api_c:tag
-    hostname: api01
+    hostname: apiend
     environment:
-       PROCESSOS: "20"
+       PROCESSOS: "30"
     ports:
       - "3001:3001"
       - "3002:3002"
@@ -25,7 +25,7 @@ services:
     volumes:
       - ./ngnix.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - api01
+      - apiend
     ports:
       - "9999:9999"
     deploy:
