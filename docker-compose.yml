@@ -7,7 +7,7 @@ services:
     image: api_c:tag
     hostname: apiend
     environment:
-       PROCESSOS: "40" #isso totaliza 70 processos simultaneos, já que ambas as rotas
+       PROCESSOS: "40" #isso totaliza 80 processos simultaneos, já que ambas as rotas
        ## vão forkear até 35 processos
     ports:
       - "3001:3001"
