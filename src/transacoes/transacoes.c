@@ -8,6 +8,8 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
     }
     //isso é importante para evitar problemas de concorrência
 
+
+
     int inicio = time(NULL);
     while(resource.lock(id_cliente)){
         int agora = time(NULL);
@@ -16,6 +18,12 @@ CwebHttpResponse  * gera_transacao(void *requisicao,CwebHttpRequest *request,Dtw
             //significa que deu merda e o cliente vai aborta
             return cweb_send_text("",ERRO_INTERNO);
         }
+    }
+    int agora = time(NULL);
+    int duracao = agora - inicio;
+    if(duracao > TIMEOUT_FUNCAO){
+        //significa que deu merda e o cliente vai aborta
+        return cweb_send_text("",ERRO_INTERNO);
     }
 
     UniversalGarbage *garbage = newUniversalGarbage();

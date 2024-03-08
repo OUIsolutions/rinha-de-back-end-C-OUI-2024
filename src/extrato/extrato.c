@@ -12,6 +12,13 @@ CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
             return cweb_send_text("",ERRO_INTERNO);
         }
     }
+    int agora = time(NULL);
+    int duracao = agora - inicio;
+    if(duracao > TIMEOUT_FUNCAO){
+        //significa que deu merda e o cliente vai aborta
+        return cweb_send_text("",ERRO_INTERNO);
+    }
+
     UniversalGarbage *garbage = newUniversalGarbage();
     Requisicao  *requisicao_parseada = (Requisicao*)requisicao;
     requisicao_parseada->adiquiriu_o_bloqueio = true;
