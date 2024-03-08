@@ -56,13 +56,13 @@ void plotar_meta_dados_corrente(struct  timeval inicio,void *requisicao){
     xpath.set_int(data,fim.tv_usec,"['fim','nanosegundos']");
 
     if(req->adiquiriu_o_bloqueio){
-        xpath.set_int(data, req->momento_do_bloqueio_adiquirido.tv_sec, "['bloqueio','adiquirida','segundos']");
-        xpath.set_int(data, req->momento_do_bloqueio_adiquirido.tv_usec, "['bloqueio','adiquirida','nanosegundos']");
+        xpath.set_int(data, req->momento_do_bloqueio_adiquirido.tv_sec, "['bloqueio', 'adiquirido','segundos']");
+        xpath.set_int(data, req->momento_do_bloqueio_adiquirido.tv_usec, "['bloqueio','adiquirido','nanosegundos']");
     }
 
     if(req->liberou_o_bloqueio){
-        xpath.set_int(data, req->momento_do_bloqueio_liberado.tv_sec, "['bloqueio','liberada','segundos']");
-        xpath.set_int(data, req->momento_do_bloqueio_liberado.tv_usec, "['bloqueio','liberada','nanosegundos']");
+        xpath.set_int(data, req->momento_do_bloqueio_liberado.tv_sec, "['bloqueio','liberado','segundos']");
+        xpath.set_int(data, req->momento_do_bloqueio_liberado.tv_usec, "['bloqueio','liberado','nanosegundos']");
     }
 
     char *result = xpath.dump_to_string(data,true);
