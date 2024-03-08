@@ -3,6 +3,23 @@ Repositorio da api rest da rinha de back end C em 2024
 Essa Versão não possui nenhuma otmização bizarra de perfórmace
 e esta seguindo todos os critérios de funcionamento da OUI 
 
+# Contatos
+
+Caso queiram entrar em contanto com a gente
+
+[Nosso Site](https://oui.tec.br/)
+
+[Nosso linkedin](https://www.linkedin.com/company/oui-tecnologia/)
+
+Whats do Cara que escreveu essa api:
+
++55 11 98333 1701
+
+Email do cara que escreveu essa api:
+
+mateusmoutinho01@gmail.com
+
+
 # Rodando a aplicação 
 para rodar essa aplicação ,você obrigatoriamente precisa estar em um linux
 seja alguma distro ou wsl, e também precisa ter um compilador C instalado 
@@ -60,6 +77,7 @@ Para fazer essa api usei uma série de tecnologias OUI
 
 ## CWebStudio
 Framework web usado para construir fazer as requisições http
+
 [Repositório](https://github.com/OUIsolutions/CWebStudio)
 
 ## DoTheWorld
@@ -70,6 +88,7 @@ dos clientes,controlar os bloqueamentos de cada cliente
 
 ## CXpathJson 
 Usada para escrever/ler todos os jsons do projeto, tanto os dos arquivos dos clientes, quanto as entradas e saidas da api 
+
 [Repositório](https://github.com/OUIsolutions/cxpathjson)
 
 ## Universal Garbage
