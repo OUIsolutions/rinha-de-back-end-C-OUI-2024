@@ -1,5 +1,7 @@
 version: "1.0"
 
+
+
 services:
   api01: &api
     image: api_c:tag
@@ -7,8 +9,8 @@ services:
     environment:
        PORTA: "8081"
        PROCESSOS: "4"
-    volumes:
-      - ./b:/b
+
+
     ports:
       - "8081:8081"
     deploy:
