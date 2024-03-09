@@ -7,14 +7,14 @@ CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
     while(resource.lock(id_cliente)){
         int agora = time(NULL);
         int duracao = agora - inicio;
-        if(duracao > TIMEOUT_FUNCAO){
+        if(duracao > TOLERANCIA_BLOQUEIO){
             //significa que deu merda e o cliente vai aborta
             return cweb_send_text("",ERRO_INTERNO);
         }
     }
     int agora = time(NULL);
     int duracao = agora - inicio;
-    if(duracao > TIMEOUT_FUNCAO){
+    if(duracao > TOLERANCIA_BLOQUEIO){
         //significa que deu merda e o cliente vai aborta
         return cweb_send_text("",ERRO_INTERNO);
     }
