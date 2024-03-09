@@ -13,7 +13,10 @@
 #define DESCRICAO_COM_TAMANHO_INVALIDO "descricao com tamanho inválido"
 #define TIPO_INVALIDO "tipo invalido"
 #define TIPO_NAO_INFORMADO "tipo não informado"
+#define ERRO_INTERNO_MESSAGEM "erro interno"
 #else
+#define ERRO_INTERNO_MESSAGEM ""
+
 #define ROTA_INVALIDA ""
 #define CLIENTE_NAO_EXIST ""
 #define BODY_NAO_INFORMADO ""
