@@ -29,7 +29,7 @@ CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
 
 
     CxpathJson  *dados = xpath.new_from_string(dados_str);
-    UniversalGarbage_add(garbage, cJSON_Delete,dados);
+    UniversalGarbage_add(garbage, xpath.free,dados);
 
     int saldo = xpath.get_int(dados,"['%s']",SALDO_CHAVE_BANCO);
     int limite = xpath.get_int(dados,"['%s']",LIMITE_CHAVE_BANCO);
