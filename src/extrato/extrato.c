@@ -64,7 +64,7 @@ CwebHttpResponse  * gera_extrato(void *requisicao,DtwResource *id_cliente){
     UniversalGarbage_add(garbage, xpath.free, objeto_transacao);
 
     xpath.set_empty_array(resposta,"['%s']",ULTIMAS_TRANSACOES_CHAVE);
-    
+
     for(int i =ultima_transacao; i >= (ultima_transacao+1) - total_transacoes; i--){
 
         char * texto_transacao = resource.get_string_from_sub_resource(pasta_transacoes,"%d",i);

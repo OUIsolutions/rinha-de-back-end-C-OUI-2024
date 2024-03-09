@@ -56,6 +56,9 @@ int main(int argc, char *argv[]){
         }
     #else
             CwebServer server = newCwebSever(porta, main_sever);
+    #ifdef PROCESSO_UNICO
+            server.single_process = true;
+    #endif
             server.max_queue = MAXIMO_FILA;
             server.max_requests =  total_processos;
             server.function_timeout = TIMEOUT_FUNCAO;

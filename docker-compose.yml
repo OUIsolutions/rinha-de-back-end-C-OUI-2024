@@ -7,8 +7,9 @@ services:
     image: rinha_de_back_end_oui:0.1
     hostname: apiend
     environment:
-       PROCESSOS: "40" #isso totaliza 80 processos simultaneos, já que ambas as rotas
-       ## vão forkear até 35 processos
+      #isso totaliza 80 processos simultaneos, já que ambas as rotas
+      ## vão forkear até 35 processos
+       PROCESSOS: "60"
     ports:
       - "3001:3001"
       - "3002:3002"
