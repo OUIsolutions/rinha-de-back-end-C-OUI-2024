@@ -4,12 +4,12 @@ version: "1.0"
 
 services:
   apiend: &api
-    image: rinha_de_back_end_oui:0.1
+    image: rinha_de_back_end_oui:0.2
     hostname: apiend
     environment:
       #isso totaliza 80 processos simultaneos, já que ambas as rotas
       ## vão forkear até 35 processos
-       PROCESSOS: "60"
+       PROCESSOS: "40"
     ports:
       - "3001:3001"
       - "3002:3002"
