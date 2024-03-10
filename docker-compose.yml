@@ -9,7 +9,7 @@ services:
     environment:
       #isso totaliza 80 processos simultaneos, já que ambas as rotas
       ## vão forkear até 35 processos
-       PROCESSOS: "20"
+       PROCESSOS: "30"
     ports:
       - "3001:3001"
       - "3002:3002"
