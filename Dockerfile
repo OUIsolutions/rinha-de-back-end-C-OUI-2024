@@ -21,4 +21,4 @@ WORKDIR /app
 RUN gcc src/main.c -o a.out
 
 # Comando padrão para executar quando o contêiner for iniciado
-CMD ["sh", "start.sh"]
+CMD ["sh", "/start.sh"]
