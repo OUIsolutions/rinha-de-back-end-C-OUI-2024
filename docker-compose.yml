@@ -24,7 +24,7 @@ services:
       resources:
         limits:
           cpus: "1.2"
-          memory: "350MB"
+          memory: "400MB"
 
 
 
