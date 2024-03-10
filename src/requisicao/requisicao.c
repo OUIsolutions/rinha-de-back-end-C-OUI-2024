@@ -14,7 +14,7 @@ Requisicao roda_servidor(CwebHttpRequest *request){
     }
     DtwResource *banco = resource.newResource(CAMINHO_BANCO);
 
-    UniversalGarbage_add(garbage, DtwResource_free,banco);
+    UniversalGarbage_add(garbage, resource.free,banco);
     DtwResource *cliente = resource.sub_resource(banco,rota_obj.id_cliente);
 
 
