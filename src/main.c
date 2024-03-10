@@ -26,7 +26,7 @@ CwebHttpResponse *main_sever(CwebHttpRequest *request ){
 int main(int argc, char *argv[]){
     int porta = PORTA_PADRAO;
     int total_processos = MAXIMO_REQUEST;
-
+    bool proceso_unico = false;
     // para rodar via docker
     if(argc >= 2){
         sscanf(argv[1],"%d",&porta);
@@ -35,6 +35,10 @@ int main(int argc, char *argv[]){
     if(getenv(VARIAVEL_TOTAL_PROCESSOS)){
         sscanf(getenv(VARIAVEL_TOTAL_PROCESSOS),"%d",&total_processos);
     }
+    if(getenv(PROCESSO_UNICO)){
+        proceso_unico = true;
+    }
+
     cria_namespaces();
 
     printf("porta escolhida: %d\n",porta);
@@ -56,9 +60,7 @@ int main(int argc, char *argv[]){
         }
     #else
             CwebServer server = newCwebSever(porta, main_sever);
-    #ifdef PROCESSO_UNICO
-            server.single_process = true;
-    #endif
+            server.single_process = proceso_unico;
             server.max_queue = MAXIMO_FILA;
             server.max_requests =  total_processos;
             server.function_timeout = TIMEOUT_FUNCAO;
