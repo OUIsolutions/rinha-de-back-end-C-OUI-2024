@@ -9,22 +9,18 @@ services:
     environment:
       #isso totaliza 80 processos simultaneos, já que ambas as rotas
       ## vão forkear até 35 processos
-       PROCESSOS: "30"
+       PROCESSOS: "100"
     ports:
       - "3001:3001"
       - "3002:3002"
-      - "3003:3003"
-      - "3004:3004"
-      - "3005:3005"
-      - "3006:3006"
-
+  
     volumes:
       - ./start.sh:/start.sh
 
     deploy:
       resources:
         limits:
-          cpus: "1.2"
+          cpus: "1.20"
           memory: "350MB"
 
 
