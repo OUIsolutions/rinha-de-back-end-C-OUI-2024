@@ -4,7 +4,7 @@ version: "1.0"
 
 services:
   apiend: &api
-    image: mateusmoutinho/rinha_de_back_end_oui2:0.1 .
+    image: mateusmoutinho/rinha_de_back_end_oui2:0.1 
     hostname: apiend
     environment:
       #isso totaliza 80 processos simultaneos, já que ambas as rotas
@@ -24,7 +24,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.1"
+          cpus: "1.2"
           memory: "350MB"
 
 
@@ -40,7 +40,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
+          cpus: "0.3"
           memory: "200MB"
 
 
