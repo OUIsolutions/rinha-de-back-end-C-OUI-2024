@@ -9,7 +9,7 @@ services:
     environment:
       #isso totaliza 80 processos simultaneos, já que ambas as rotas
       ## vão forkear até 35 processos
-       PROCESSOS: "20"
+       PROCESSOS: "40"
     ports:
       - "3001:3001"
       - "3002:3002"
@@ -25,7 +25,7 @@ services:
       resources:
         limits:
           cpus: "1.1"
-          memory: "400MB"
+          memory: "500MB"
 
 
 
@@ -41,7 +41,7 @@ services:
       resources:
         limits:
           cpus: "0.4"
-          memory: "150MB"
+          memory: "50MB"
 
 
 
