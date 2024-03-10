@@ -1,6 +1,6 @@
 docker run -p 3001:3001 -p 3002:3002  -d api_c:tag      
  
-docker build  --no-cache -t mateusmoutinho/rinha_de_back_end_oui:0.1 .
+docker build  --no-cache -t mateusmoutinho/rinha_de_back_end_oui2:0.1 .
 
 docker exec -it  8619 /bin/sh
 docker-compose up -d
